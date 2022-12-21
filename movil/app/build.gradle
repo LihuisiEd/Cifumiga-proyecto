@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.cifumiga.app'
+    namespace 'com.cifumiga.application'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.cifumiga.app"
+        applicationId "com.cifumiga.application"
         minSdk 21
         targetSdk 32
         versionCode 1
