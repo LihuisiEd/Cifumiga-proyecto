@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Cifumiga</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -10,4 +10,37 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="clients">Clientes</string>
+    <string name="add_client">Añadir Cliente</string>
+    <string name="security">Seguridad</string>
+    <string name="calendar">Cronograma</string>
+    <string name="ruc">RUC</string>
+    <string name="nombre_del_cliente">Nombre del cliente</string>
+    <string name="agregar_cliente">Agregar Cliente</string>
+    <string name="seleccionar_fecha">Seleccionar fecha</string>
+    <string name="en_tramite">En trámite para: </string>
+    <string name="contacto">Contacto</string>
+    <string name="eliminar_tr_mite">Eliminar Trámite</string>
+    <string name="fecha">Fecha</string>
+    <string name="cliente">Cliente</string>
+    <string name="tipo_de_servicio">Tipo de servicio</string>
+    <string name="servicios">Servicios</string>
+    <string name="descripcion">Descripción</string>
+    <string name="desinfeccion">Desinfección</string>
+    <string name="desratizacion">Desratización</string>
+    <string name="desinsectacion">Desinsectación</string>
+    <string name="limpieza_de_reservorio">Limpieza de reservorio</string>
+    <string name="agregar_tramite">Agregar Trámite</string>
+    <string name="actualizar_tramite">Actualizar trámite</string>
+    <string name="actualizar_cliente">Actualizar Cliente</string>
+    <string name="dia">Día</string>
+    <string name="mes">Mes</string>
+    <string name="year">Año</string>
+    <string name="urlAPI">http://192.168.1.34:8000</string>
+    <string name="buscar_cliente">Buscar cliente...</string>
+    <string name="buscar_un_cliente">Intenta buscar un cliente</string>
+    <string name="fecha_del_tramite">Fecha del trámite</string>
+    <string name="datos_del_tramite">Datos del trámite</string>
+    <string name="intenta_seleccionarn_unafecha">Intenta seleccionar \nuna fecha</string>
 </resources>

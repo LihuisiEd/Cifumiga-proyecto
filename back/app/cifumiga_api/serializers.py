@@ -52,8 +52,8 @@ class ServicioSerializer(serializers.ModelSerializer):
         fields = '__all__'
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['cliente'] = instance.cliente.cli_nombre
-        representation['tipo'] = instance.tipo.tserv_nombre
+        representation['cliente'] = instance.cliente.cliente_nombre
+        representation['tipo'] = instance.tipo.servicio_nombre
         return representation
 
 class TipoServicioSerializer(serializers.ModelSerializer):
@@ -61,7 +61,13 @@ class TipoServicioSerializer(serializers.ModelSerializer):
         model = Tipo_servicio
         fields = '__all__'
 
-class NivelServicioSerializer(serializers.ModelSerializer):
+
+class TramiteSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Nivel_tservicio
+        model = Tramite
         fields = '__all__'
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['cliente'] = instance.cliente.cliente_nombre
+        representation['tipo'] = instance.tipo.servicio_nombre
+        return representation

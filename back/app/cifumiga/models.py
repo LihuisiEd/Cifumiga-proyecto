@@ -13,7 +13,7 @@ class Cliente(models.Model):
     cli_fecmodificacion = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.cli_nombre
+        return self.cliente_nombre
 
 class Empleado(AbstractUser):
     name = models.CharField(max_length=255)
@@ -56,6 +56,8 @@ class Factura(models.Model):
 
 class Tipo_servicio(models.Model):
     servicio_nombre = models.CharField(max_length=100)
+    def __str__(self):
+        return self.servicio_nombre
 
 class Servicio(models.Model):
     tipo = models.ForeignKey(Tipo_servicio, related_name='tipo_servicio', on_delete=models.CASCADE)
@@ -90,13 +92,6 @@ class Documento_Cliente(models.Model):
     documento = models.ForeignKey(Documento, related_name='documento', on_delete=models.CASCADE)
 
 
-class Nivel_tservicio(models.Model):
-    tipo = models.ForeignKey(Tipo_servicio, related_name='tipo', on_delete=models.CASCADE)
-    nserv_nombre = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.nserv_nombre
-
 class Informe(models.Model):
     informe_mes = models.CharField(max_length=20)
     informe_sostenimiento = models.TextField(max_length=150)
@@ -112,26 +107,29 @@ class Seguridad_Cliente(models.Model):
     doc_ats = models.FileField(upload_to="atss/", null=True, blank=True)
     
     def __str__(self):
-        return self.cliente.cli_nombre
+        return self.cliente.cliente_nombre
 
 class Seguridad(models.Model):
     doc_productos = models.FileField(upload_to="productos/", null=True, blank=True)
     doc_pets = models.FileField(upload_to="pets/", null=True, blank=True)
 
-class Tramites(models.Model):
+class Tramite(models.Model):
     tipo = models.ForeignKey(Tipo_servicio, related_name='tipo_tramite', on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente, related_name='tramite_cliente', on_delete=models.CASCADE)
     tramite_fecha = models.DateField()
     tramite_contacto = models.CharField(max_length=50)
-    tramite_tipo = models.CharField(max_length=100)
+    tramite_nivel_1 = models.BooleanField(default=False)
+    tramite_nivel_2 = models.BooleanField(default=False)
+    tramite_nivel_3 = models.BooleanField(default=False)
+    tramite_nivel_4 =  models.BooleanField(default=False)
     tramite_descripcion = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.cliente.cli_nombre
+        return self.cliente.cliente_nombre
     
 class Comentario(models.Model):
     cliente = models.ForeignKey(Cliente, related_name='comentario_cliente', on_delete=models.CASCADE)
     comentario = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.cliente.cli_nombre
+        return self.cliente.cliente_nombre

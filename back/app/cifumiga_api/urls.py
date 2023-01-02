@@ -16,8 +16,7 @@ urlpatterns = [
     path('services/', views.ServicioAPI.as_view()),
     path('services/<int:clienteid>', views.ServicioAPIDetalle.as_view()),
     path('typeservice/', views.TipoServicioAPI.as_view()),
-    path('levelservice/', views.NivelServicioAPI.as_view()),
-    path('levelservice/<int:tipo_id>', views.NivelServicioAPIDetalle.as_view())
+    path('tramites/', views.TramiteAPI.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
