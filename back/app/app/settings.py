@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -147,6 +148,17 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+'DEFAULT_AUTHENTICATION_CLASSES': [
+    # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+]
+}
+
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
@@ -158,3 +170,7 @@ MEDIA_URL = "/files/"
 
 ## AUTH_PROFILE_MODULE = 'cifumiga.Empleado'
 AUTH_USER_MODEL = 'cifumiga.Empleado'
+
+
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')

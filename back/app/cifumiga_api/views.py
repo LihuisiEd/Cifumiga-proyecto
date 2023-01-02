@@ -276,28 +276,16 @@ class TipoServicioAPI(APIView):
 
         return Response(serializer.data)
 
-class NivelServicioAPI(APIView):
+class TramiteAPI(APIView):
     def get(self, request):
-        nivelservicio = Nivel_tservicio.objects.all()
-        serializer = NivelServicioSerializer(nivelservicio, many=True)
+        tramite = Tramite.objects.all()
+        serializer = TramiteSerializer(tramite, many=True)
 
         return Response(serializer.data)
 
-class NivelServicioAPIDetalle(APIView):
-    def get_object(self, tipo_id):
-        try:
-            return Nivel_tservicio.objects.get(pk=tipo_id)
-        except Nivel_tservicio.DoesNotExist:
-            raise Http404
-
-    def get(self, request, tipo_id):
-        nivel = Nivel_tservicio.objects.filter(tipo=tipo_id)
-        serializer = NivelServicioSerializer(nivel, many=True)
-
-        return Response(serializer.data)
-    
-
-    def delete(self, request, tipo_id, format=None):
-        nivel = Nivel_tservicio.objects.get(pk=tipo_id)
-        nivel.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    def post(self, request):
+        serializer = TramiteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
