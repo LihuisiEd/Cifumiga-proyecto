@@ -9,12 +9,16 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.auth0.android.jwt.JWT
 import com.cifumiga.application.R
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONException
 import org.json.JSONObject
 
 class Login : AppCompatActivity() {
+
+    var JWTtoken = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,8 +31,8 @@ class Login : AppCompatActivity() {
         StrictMode.setThreadPolicy(policy)
 
         login.setOnClickListener(){
-            //loginValidate()
-            ingresarPrueba()
+            loginValidate()
+            //ingresarPrueba()
         }
 
         go_register.setOnClickListener(){
@@ -60,8 +64,8 @@ class Login : AppCompatActivity() {
                 Request.Method.POST, url,jsonObj,
                 Response.Listener { response ->
                     try{
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
+                        JWTtoken = response.getString("jwt")
+                        openProfile(JWTtoken)
                     } catch (e: JSONException){
                         showError("Hey, estos datos no van")
                     }
@@ -70,6 +74,21 @@ class Login : AppCompatActivity() {
                 })
             queue.add(stringRequest)
         }
+    }
+
+    private fun openProfile(jwTtoken: String) {
+        val intent = Intent(this, MainActivity::class.java)
+        var jwt: JWT = JWT(this.JWTtoken)
+        val user_id = jwt.getClaim("id").asInt()
+        val user_name = jwt.getClaim("name").asString().toString()
+
+        val datos = getSharedPreferences("DatosUsuario", MODE_PRIVATE)
+        val editor = datos.edit()
+        editor.putString("id",user_id.toString())
+        editor.putString("user_name", user_name)
+        editor.apply()
+        startActivity(intent)
+        finish()
     }
 
     private fun showError(s:String){

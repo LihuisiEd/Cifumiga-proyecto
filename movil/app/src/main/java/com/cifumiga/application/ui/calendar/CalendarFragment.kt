@@ -124,10 +124,14 @@ class CalendarFragment : Fragment() {
                                     response.getJSONObject(i).getInt("id")
                                 val fecha =
                                     response.getJSONObject(i).getString("tramite_fecha")
+                                val direccion =
+                                    response.getJSONObject(i).getString("direccion")
+                                val referencia =
+                                    response.getJSONObject(i).getString("referencia")
                                 var contacto =
                                     response.getJSONObject(i).getString("tramite_contacto").toString()
-                                var descripcion =
-                                    response.getJSONObject(i).getString("tramite_descripcion").toString()
+                                var telefono =
+                                    response.getJSONObject(i).getString("tramite_telefono").toString()
                                 var tipo_n1 =
                                     response.getJSONObject(i).getBoolean("tramite_nivel_1")
                                 var tipo_n2 =
@@ -136,11 +140,15 @@ class CalendarFragment : Fragment() {
                                     response.getJSONObject(i).getBoolean("tramite_nivel_3")
                                 var tipo_n4 =
                                     response.getJSONObject(i).getBoolean("tramite_nivel_4")
+                                var problemas =
+                                    response.getJSONObject(i).getString("problemas")
+                                var condicion_subestandar =
+                                    response.getJSONObject(i).getString("condicion_subestandar")
                                 var tipo =
                                     response.getJSONObject(i).getString("tipo").toString()
                                 var cliente =
                                     response.getJSONObject(i).getString("cliente").toString()
-                                llenarLista.add(Tramite(id,cliente, tipo,contacto,descripcion,fecha,tipo_n1,tipo_n2,tipo_n3,tipo_n4))
+                                llenarLista.add(Tramite(id,cliente, tipo,direccion,referencia,contacto,telefono,fecha,tipo_n1,tipo_n2,tipo_n3,tipo_n4,problemas,condicion_subestandar))
                             }
                             lista?.adapter = adapter
                             swipeEnd(swipe)

@@ -36,6 +36,9 @@ class AdaptadorClientes(var Lista: ArrayList<Cliente>):
 
         holder.itemView.setOnClickListener(){
             val llamaractividad = Intent(holder.itemView.context, DataCliente::class.java)
+            llamaractividad.putExtra("id", id)
+            llamaractividad.putExtra("nombre", nombre)
+            llamaractividad.putExtra("ruc", ruc)
             holder.itemView.context.startActivity(llamaractividad)
         }
 

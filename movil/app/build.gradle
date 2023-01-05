@@ -56,5 +56,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
     implementation("com.android.volley:volley:1.2.1")
+    implementation 'com.auth0.android:jwtdecode:2.0.1'
 
 }

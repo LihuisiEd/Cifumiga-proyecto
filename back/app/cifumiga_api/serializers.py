@@ -71,3 +71,13 @@ class TramiteSerializer(serializers.ModelSerializer):
         representation['cliente'] = instance.cliente.cliente_nombre
         representation['tipo'] = instance.tipo.servicio_nombre
         return representation
+
+class KilometrajeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Kilometraje
+        fields = '__all__'
+
+class OperacionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Operacion
+        fields = '__all__'

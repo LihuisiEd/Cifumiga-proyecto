@@ -1,55 +1,42 @@
 package com.cifumiga.application
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
+
 import androidx.appcompat.app.AppCompatActivity
-import com.cifumiga.application.databinding.ActivityMainBinding
+import com.cifumiga.application.ui.calendar.CalendarActivity
+import com.cifumiga.application.ui.clients.ClientesActivity
+import com.cifumiga.application.ui.kilometraje.KilometrajeActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val datos = this.getSharedPreferences("DatosUsuario", Context.MODE_PRIVATE)
+        val userId = datos.getString("id", "id de usuario").toString()
+        val userName = datos.getString("user_name", "Nombre de usuario").toString()
+        val split = userName.split(" ").toTypedArray()
+        val onlyName = split[0]
+        saludo_ingreso.text = "Hola, " + onlyName
 
-        setSupportActionBar(binding.appBarMain.toolbar)
-
-        /*
-        binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        imageButton1.setOnClickListener() {
+            val intent = Intent(this, ClientesActivity::class.java)
+            startActivity(intent)
+        }
+        imageButton2.setOnClickListener() {
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
+        }
+        imageButton3.setOnClickListener() {
+            val intent = Intent(this, KilometrajeActivity::class.java)
+            intent.putExtra("id", userId)
+            startActivity(intent)
         }
 
-         */
-        val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_clients, R.id.nav_security, R.id.nav_calendar
-            ), drawerLayout
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
     }
 
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
 }
