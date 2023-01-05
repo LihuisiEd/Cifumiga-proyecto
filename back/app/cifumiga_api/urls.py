@@ -16,7 +16,14 @@ urlpatterns = [
     path('services/', views.ServicioAPI.as_view()),
     path('services/<int:clienteid>', views.ServicioAPIDetalle.as_view()),
     path('typeservice/', views.TipoServicioAPI.as_view()),
-    path('tramites/', views.TramiteAPI.as_view())
+    path('tramites/', views.TramiteAPI.as_view()),
+    path('tramites/<int:tramiteid>', views.TramiteAPIDetalle.as_view()),
+    path('kilometrajes/', views.KilometrajeAPI.as_view()),
+    path('kilometrajes/empleado/<int:empleadoid>', views.KilometrajeAPIDetalle.as_view()),
+    path('kilometrajes/<int:kilometrajeid>', views.KilometrajeAPIDetalleID.as_view()),
+    path('operaciones/', views.OperacionAPI.as_view()),
+    path('operaciones/cliente/<int:clienteid>', views.OperacionAPIDetalle.as_view()),
+    path('operaciones/<int:operacionid>', views.OperacionAPIDetalleID.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

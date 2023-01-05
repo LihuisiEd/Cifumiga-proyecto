@@ -27,11 +27,12 @@
     <string name="tipo_de_servicio">Tipo de servicio</string>
     <string name="servicios">Servicios</string>
     <string name="descripcion">Descripción</string>
-    <string name="desinfeccion">Desinfección</string>
-    <string name="desratizacion">Desratización</string>
-    <string name="desinsectacion">Desinsectación</string>
-    <string name="limpieza_de_reservorio">Limpieza de reservorio</string>
+    <string name="nivel1">Desinfección</string>
+    <string name="nivel2">Desratización</string>
+    <string name="nivel3">Desinsectación</string>
+    <string name="nivel4">Limpieza de reservorio</string>
     <string name="agregar_tramite">Agregar Trámite</string>
+    <string name="modificar_tramite">Modificar Trámite</string>
     <string name="actualizar_tramite">Actualizar trámite</string>
     <string name="actualizar_cliente">Actualizar Cliente</string>
     <string name="dia">Día</string>
@@ -43,4 +44,20 @@
     <string name="fecha_del_tramite">Fecha del trámite</string>
     <string name="datos_del_tramite">Datos del trámite</string>
     <string name="intenta_seleccionarn_unafecha">Intenta seleccionar \nuna fecha</string>
+    <string name="no_cuenta_con_servicios_establecidos">No cuenta con servicios establecidos</string>
+    <string name="telefono">Telefono</string>
+    <string name="direccion">Dirección</string>
+    <string name="referencia">Referencia</string>
+    <string name="problemas">Problemas</string>
+    <string name="condiciones_subestandar">Condiciones Subestandar</string>
+    <string name="servicio">Servicio</string>
+    <string name="kilometraje">Kilometraje</string>
+    <string name="agregar_kilometraje">Agregar Kilometraje</string>
+    <string name="modificar_kilometraje">Modificar Kilometraje</string>
+    <string name="tr_mites">Trámites</string>
+    <string name="km_inicial">Km Inicial</string>
+    <string name="km_final">Km final</string>
+    <string name="resultado">Resultado</string>
+    <string name="placa">Placa</string>
+    <string name="correo">Correo</string>
 </resources>

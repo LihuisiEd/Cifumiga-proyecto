@@ -52,7 +52,7 @@ class Factura(models.Model):
     doc_factura = models.FileField(upload_to="facturas/", null=True, blank=True)
 
     def __str__(self):
-        return self.cliente.cli_nombre
+        return self.cliente.cliente_nombre
 
 class Tipo_servicio(models.Model):
     servicio_nombre = models.CharField(max_length=100)
@@ -117,12 +117,16 @@ class Tramite(models.Model):
     tipo = models.ForeignKey(Tipo_servicio, related_name='tipo_tramite', on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente, related_name='tramite_cliente', on_delete=models.CASCADE)
     tramite_fecha = models.DateField()
-    tramite_contacto = models.CharField(max_length=50)
+    direccion = models.CharField(max_length=200)
+    referencia = models.CharField(max_length=200)
+    tramite_contacto = models.CharField(max_length=100)
+    tramite_telefono = models.CharField(max_length=20)
     tramite_nivel_1 = models.BooleanField(default=False)
     tramite_nivel_2 = models.BooleanField(default=False)
     tramite_nivel_3 = models.BooleanField(default=False)
     tramite_nivel_4 =  models.BooleanField(default=False)
-    tramite_descripcion = models.CharField(max_length=200)
+    problemas = models.CharField(max_length=300)
+    condicion_subestandar = models.CharField(max_length=300)
 
     def __str__(self):
         return self.cliente.cliente_nombre
@@ -133,3 +137,14 @@ class Comentario(models.Model):
 
     def __str__(self):
         return self.cliente.cliente_nombre
+
+class Kilometraje(models.Model):
+    empleado = models.ForeignKey(Empleado, related_name='empleado', on_delete=models.CASCADE)
+    fecha = models.DateField()
+    placa = models.CharField(max_length=7, unique=True)
+    kilometraje_inicio = models.DecimalField(max_digits=8, decimal_places=2)
+    kilometraje_fin = models.DecimalField(max_digits=8,decimal_places=2)
+    kilometraje_total = models.DecimalField(max_digits=8,decimal_places=2, null=True, blank=True)
+
+    def __str__(self):
+        return self.empleado.name

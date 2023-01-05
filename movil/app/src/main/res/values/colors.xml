@@ -10,10 +10,12 @@
 
     <color name="green_200">#599F54</color>
     <color name="blue_500">#405A79</color>
-    <color name="gray_500">#AFAFAF</color>
+    <color name="gray_800">#616161</color>
+    <color name="gray_600">#818181</color>
+    <color name="gray_500">#BFBFBF</color>
     <color name="gray_100">#E1E1E1</color>
     <color name="blue_200">#6D98CC</color>
     <color name="red_danger">#F44336</color>
     <color name="green_500">#397C40</color>
-    <color name="transparent">#25000000</color>
+    <color name="transparent">#ED000000</color>
 </resources>

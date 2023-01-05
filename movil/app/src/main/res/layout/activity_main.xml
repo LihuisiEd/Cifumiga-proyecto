@@ -1,25 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
-    <include
-        android:id="@+id/app_bar_main"
-        layout="@layout/app_bar_main"
+    <TextView
+        android:id="@+id/saludo_ingreso"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginVertical="24dp"
+        android:textSize="28dp"
+        android:text="Hola, Oscar José"/>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
-</androidx.drawerlayout.widget.DrawerLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/imageButton1"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_weight="1"
+                android:text="@string/clients"
+                android:paddingVertical="40dp"
+                android:layout_margin="5dp"
+                android:drawableTint="@color/gray_600"
+                android:textColor="@color/gray_600"
+                android:backgroundTint="@color/gray_100"
+                android:drawableTop="@drawable/user_group_solid"
+                tools:targetApi="m" />
+            <Button
+                android:id="@+id/imageButton2"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_weight="1"
+                android:text="@string/tr_mites"
+                android:paddingVertical="40dp"
+                android:layout_margin="5dp"
+                android:drawableTint="@color/gray_600"
+                android:textColor="@color/gray_600"
+                android:backgroundTint="@color/gray_100"
+                android:drawableTop="@drawable/calendar_days_regular"
+                tools:targetApi="m" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/imageButton3"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_weight="1"
+                android:text="@string/kilometraje"
+                android:paddingVertical="40dp"
+                android:layout_margin="5dp"
+                android:drawableTint="@color/gray_600"
+                android:textColor="@color/gray_600"
+                android:backgroundTint="@color/gray_100"
+                android:drawableTop="@drawable/road_solid"
+                tools:targetApi="m" />
+            <Button
+                android:id="@+id/imageButton4"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_weight="1"
+                android:text="@string/security"
+                android:paddingVertical="40dp"
+                android:layout_margin="5dp"
+                android:drawableTint="@color/gray_600"
+                android:textColor="@color/gray_600"
+                android:backgroundTint="@color/gray_100"
+                android:drawableTop="@drawable/shield_halved_solid"
+                tools:targetApi="m" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:backgroundTint="@color/gray_100"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
+        android:padding="18dp"
+        android:background="@drawable/corners_layout">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

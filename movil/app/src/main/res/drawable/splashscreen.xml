@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/side_nav_bar"/>
+    <item android:drawable="@drawable/side_nav_bar"
+        android:gravity="center" />
     <item android:drawable="@drawable/logo_movil_splash"
         android:gravity="center" />
 </layer-list>
