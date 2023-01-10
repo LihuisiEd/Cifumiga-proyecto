@@ -65,10 +65,25 @@ class ClientesActivity : AppCompatActivity() {
                                     response.getJSONObject(i).getString("cliente_nombre")
                                 var ruc =
                                     response.getJSONObject(i).getString("cliente_ruc").toString()
+                                var contacto =
+                                    response.getJSONObject(i).getString("cliente_contacto").toString()
+                                var telefono =
+                                    response.getJSONObject(i).getString("cliente_telefono").toString()
+                                var correo =
+                                    response.getJSONObject(i).getString("cliente_correo").toString()
                                 if (ruc.equals("null")){
                                     ruc = "Sin ruc"
                                 }
-                                llenarLista.add(Cliente(id,nombre, ruc))
+                                if (contacto.equals("null")){
+                                    contacto = "Sin contacto"
+                                }
+                                if (correo.equals("null")){
+                                    correo = "Sin correo"
+                                }
+                                if (telefono.equals("null")){
+                                    telefono = "Sin telefono"
+                                }
+                                llenarLista.add(Cliente(id,nombre, ruc, contacto, telefono, correo))
                             }
                             lista.adapter = adapter
                             swipeEnd(swipe)

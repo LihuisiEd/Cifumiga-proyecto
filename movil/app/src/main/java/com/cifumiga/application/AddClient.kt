@@ -17,12 +17,30 @@ class AddClient : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_client)
 
+        val contacto = txtAddContacto.text.toString().trim()
+        val telefono = txtAddTelefono.text.toString().trim()
+        val correo = txtAddCorreo.text.toString().trim()
+
         val bundle :Bundle ?=intent.extras
         val id_cliente = bundle?.getString("id").toString()
         if(bundle!=null){
             this.setTitle("Editar Cliente");
             txtAddRuc.setText(bundle.getString("ruc").toString())
             txtAddName.setText(bundle.getString("nombre").toString())
+            if (contacto.isEmpty()){
+                txtAddContacto.setText("Sin contacto")
+            }
+
+            if (telefono.isEmpty()){
+                txtAddTelefono.setText("Sin telefono")
+            }
+
+            if (correo.isEmpty()){
+                txtAddCorreo.setText("Sin correo")
+            }
+            txtAddContacto.setText(bundle.getString("contacto").toString())
+            txtAddTelefono.setText(bundle.getString("telefono").toString())
+            txtAddCorreo.setText(bundle.getString("correo").toString())
             bdAddClient.setEnabled(false)
             bdUpdateClient.setEnabled(true)
         } else{
@@ -46,6 +64,10 @@ class AddClient : AppCompatActivity() {
     private fun modCliente(id:String) {
         val ruc = txtAddRuc.text.toString().trim()
         val nombre = txtAddName.text.toString().trim()
+        val contacto = txtAddContacto.text.toString().trim()
+        val telefono = txtAddTelefono.text.toString().trim()
+        val correo = txtAddCorreo.text.toString().trim()
+
 
         if (ruc.isEmpty() || nombre.isEmpty()){
             txtAddRuc.error = "Espacio requerido"
@@ -63,6 +85,10 @@ class AddClient : AppCompatActivity() {
 
             jsonObj.put("cliente_nombre", nombre )
             jsonObj.put("cliente_ruc", ruc)
+            jsonObj.put("cliente_contacto", contacto)
+            jsonObj.put("cliente_telefono", telefono)
+            jsonObj.put("cliente_correo", correo)
+
 
             val stringRequest = JsonObjectRequest(
                 Request.Method.PUT, url,jsonObj,
@@ -83,6 +109,9 @@ class AddClient : AppCompatActivity() {
     private fun subirCliente() {
         val ruc = txtAddRuc.text.toString().trim()
         val nombre = txtAddName.text.toString().trim()
+        val contacto = txtAddContacto.text.toString().trim()
+        val telefono = txtAddTelefono.text.toString().trim()
+        val correo = txtAddCorreo.text.toString().trim()
 
         if (ruc.isEmpty() || nombre.isEmpty()){
             txtAddRuc.error = "Espacio requerido"
@@ -100,6 +129,9 @@ class AddClient : AppCompatActivity() {
 
             jsonObj.put("cliente_nombre", nombre )
             jsonObj.put("cliente_ruc", ruc)
+            jsonObj.put("cliente_contacto", contacto)
+            jsonObj.put("cliente_telefono", telefono)
+            jsonObj.put("cliente_correo", correo)
 
             val stringRequest = JsonObjectRequest(
                 Request.Method.POST, url,jsonObj,

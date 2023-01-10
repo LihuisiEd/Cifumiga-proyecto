@@ -29,9 +29,9 @@ class AdaptadorKilometraje(var Lista: ArrayList<Kilometraje>):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.ffecha?.text= "Fecha: " + Lista[position].fecha
         holder?.fplaca?.text = "Placa: " + Lista[position].placa
-        holder?.finicio?.text="Kilometraje Inicio: " + Lista[position].kilometraje_inicio
-        holder?.ffin?.text="Kilometraje Fin: " + Lista[position].kilometraje_fin
-        holder?.ftotal?.text="Kilometraje Total: " + Lista[position].kilometraje_total
+        holder?.finicio?.text="Km Inicial: " + Lista[position].kilometraje_inicio
+        holder?.ffin?.text="Km Final: " + Lista[position].kilometraje_fin
+        holder?.ftotal?.text="Km Total: " + Lista[position].kilometraje_total
         val id = Lista[position].id
         val fecha = Lista[position].fecha
         val inicio = Lista[position].kilometraje_inicio
@@ -39,6 +39,18 @@ class AdaptadorKilometraje(var Lista: ArrayList<Kilometraje>):
         val placa = Lista[position].placa
         val total = Lista[position].kilometraje_total
         val empleado = Lista[position].empleado
+
+        holder?.itemView?.setOnClickListener(){
+            val llamaractividad = Intent(holder.itemView.context, DataKilometraje::class.java)
+            llamaractividad.putExtra("id", id)
+            llamaractividad.putExtra("fecha", fecha)
+            llamaractividad.putExtra("inicio", inicio)
+            llamaractividad.putExtra("fin", fin)
+            llamaractividad.putExtra("placa", placa)
+            llamaractividad.putExtra("total", total)
+            llamaractividad.putExtra("empleado", empleado)
+            holder.itemView.context.startActivity(llamaractividad)
+        }
 
         holder?.fbtnEdit?.setOnClickListener(){
             val llamaractividad = Intent(holder.itemView.context, UpdateKM::class.java)

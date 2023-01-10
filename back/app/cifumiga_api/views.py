@@ -261,10 +261,32 @@ class ServicioAPIDetalle(APIView):
         serializer = ServicioSerializer(servicio, many=True)
 
         return Response(serializer.data)
+
+
+class ServicioAPIDetalleID(APIView):
+    def get_object(self, servicioid):
+        try:
+            return Servicio.objects.get(pk=servicioid)
+        except Servicio.DoesNotExist:
+            raise Http404
+    def get(self, request, servicioid):
+        servicio = Servicio.objects.filter(id=servicioid)
+        serializer = ServicioSerializer(servicio, many=True)
+
+        return Response(serializer.data)
+
+    def put(self, request, servicioid):
+        servicio = self.get_object(servicioid)
+        serializer = ServicioSerializer(servicio, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
-    def delete(self, request, clienteid, format=None):
-        servicio = Servicio.objects.get(pk=clienteid)
+    def delete(self, request, servicioid, format=None):
+        servicio = Servicio.objects.get(pk=servicioid)
         servicio.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 

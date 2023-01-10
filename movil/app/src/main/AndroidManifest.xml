@@ -16,9 +16,43 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".UpdateKM"
-            android:parentActivityName=".MainActivity"
+            android:name=".UpdateServicio"
+            android:parentActivityName=".ui.clients.ClientesActivity"
+            android:label="Modificar Servicio"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DataServicio"
+            android:label="Servicio"
+            android:parentActivityName=".ui.clients.ClientesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".AddServicio"
+            android:parentActivityName=".ui.clients.ClientesActivity"
+            android:label="@string/agregar_servicio"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DataKilometraje"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UpdateKM"
+            android:exported="false"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
