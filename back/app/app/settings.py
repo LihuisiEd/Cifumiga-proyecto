@@ -95,6 +95,17 @@ WSGI_APPLICATION = 'app.wsgi.application'
 #    }
 #}
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'onrender',
+        'USER': 'employeecifumiga',
+        'PASSWORD': 'ab1c6cd9c989629dbba21d9bb2a8c95b',
+        'HOST': 'c1fum1g4-apirest.onrender.com',
+        'PORT': '10000',
+    }
+}
+
 #DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.mysql',
@@ -106,16 +117,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 #    }
 #}
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'onrender',
-        'USER': 'employeecifumiga',
-        'PASSWORD': 'ab1c6cd9c989629dbba21d9bb2a8c95b',
-        'HOST': 'c1fum1g4-apirest.onrender.com',
-        'PORT': '10000',
-    }
-}
+
 
 
 
