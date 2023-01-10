@@ -38,7 +38,7 @@
                 android:layout_margin="5dp"
                 android:drawableTint="@color/gray_600"
                 android:textColor="@color/gray_600"
-                android:backgroundTint="@color/gray_100"
+                android:background="@drawable/button_corners"
                 android:drawableTop="@drawable/user_group_solid"
                 tools:targetApi="m" />
             <Button
@@ -51,7 +51,8 @@
                 android:layout_margin="5dp"
                 android:drawableTint="@color/gray_600"
                 android:textColor="@color/gray_600"
-                android:backgroundTint="@color/gray_100"
+                android:backgroundTint="@color/blue_200"
+                android:background="@drawable/button_corners"
                 android:drawableTop="@drawable/calendar_days_regular"
                 tools:targetApi="m" />
         </LinearLayout>
@@ -71,7 +72,7 @@
                 android:layout_margin="5dp"
                 android:drawableTint="@color/gray_600"
                 android:textColor="@color/gray_600"
-                android:backgroundTint="@color/gray_100"
+                android:background="@drawable/button_corners"
                 android:drawableTop="@drawable/road_solid"
                 tools:targetApi="m" />
             <Button
@@ -84,7 +85,7 @@
                 android:layout_margin="5dp"
                 android:drawableTint="@color/gray_600"
                 android:textColor="@color/gray_600"
-                android:backgroundTint="@color/gray_100"
+                android:background="@drawable/button_corners"
                 android:drawableTop="@drawable/shield_halved_solid"
                 tools:targetApi="m" />
         </LinearLayout>
@@ -95,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:backgroundTint="@color/gray_100"
+        android:backgroundTint="@color/transparent_gray"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="16dp"

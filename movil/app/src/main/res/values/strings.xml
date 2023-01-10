@@ -38,8 +38,8 @@
     <string name="dia">Día</string>
     <string name="mes">Mes</string>
     <string name="year">Año</string>
-    <string name="urlAPI">http://192.168.1.34:8000</string>
-    <string name="buscar_cliente">Buscar cliente...</string>
+    <string name="urlAPI">http://192.168.1.47:8000</string>
+    <string name="buscar_cliente">Buscar cliente…</string>
     <string name="buscar_un_cliente">Intenta buscar un cliente</string>
     <string name="fecha_del_tramite">Fecha del trámite</string>
     <string name="datos_del_tramite">Datos del trámite</string>
@@ -60,4 +60,13 @@
     <string name="resultado">Resultado</string>
     <string name="placa">Placa</string>
     <string name="correo">Correo</string>
+    <string name="eliminar_kilometraje">Eliminar kilometraje</string>
+    <string name="eliminar_cliente">Eliminar cliente</string>
+    <string name="agregar_servicio">Agregar servicio</string>
+    <string name="area">Área</string>
+    <string name="dimension_m">Dimension (m²)</string>
+    <string name="frecuencia">Frecuencia</string>
+    <string name="precio">Precio</string>
+    <string name="precio_s">Precio (S/.)</string>
+    <string name="eliminar_servicio">Eliminar servicio</string>
 </resources>

@@ -52,7 +52,7 @@ class ServicioSerializer(serializers.ModelSerializer):
         fields = '__all__'
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['cliente'] = instance.cliente.cliente_nombre
+        representation['cliente'] = instance.cliente.id
         representation['tipo'] = instance.tipo.servicio_nombre
         return representation
 

@@ -33,12 +33,18 @@ class AdaptadorClientes(var Lista: ArrayList<Cliente>):
         var id = Lista[position].id
         var nombre = Lista[position].cliente_nombre
         var ruc = Lista[position].cliente_ruc
+        var contacto = Lista[position].cliente_contacto
+        var telefono = Lista[position].cliente_telefono
+        var correo = Lista[position].cliente_correo
 
         holder.itemView.setOnClickListener(){
             val llamaractividad = Intent(holder.itemView.context, DataCliente::class.java)
-            llamaractividad.putExtra("id", id)
-            llamaractividad.putExtra("nombre", nombre)
-            llamaractividad.putExtra("ruc", ruc)
+            llamaractividad.putExtra("id",id.toString())
+            llamaractividad.putExtra("nombre",nombre)
+            llamaractividad.putExtra("ruc",ruc)
+            llamaractividad.putExtra("contacto",contacto)
+            llamaractividad.putExtra("telefono", telefono)
+            llamaractividad.putExtra("correo",correo)
             holder.itemView.context.startActivity(llamaractividad)
         }
 
@@ -47,6 +53,9 @@ class AdaptadorClientes(var Lista: ArrayList<Cliente>):
             llamaractividad.putExtra("id",id.toString())
             llamaractividad.putExtra("nombre",nombre)
             llamaractividad.putExtra("ruc",ruc)
+            llamaractividad.putExtra("contacto",contacto)
+            llamaractividad.putExtra("telefono", telefono)
+            llamaractividad.putExtra("correo",correo)
             holder.itemView.context.startActivity(llamaractividad)
         }
 

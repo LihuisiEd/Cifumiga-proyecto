@@ -9,6 +9,9 @@ from django.contrib.auth.models import AbstractUser
 class Cliente(models.Model):
     cliente_nombre = models.CharField(max_length=255)
     cliente_ruc = models.CharField(max_length=200, null=True, blank=True)
+    cliente_contacto = models.CharField(max_length=100, null=True, blank=True)
+    cliente_telefono = models.CharField(max_length=50, null=True, blank=True)
+    cliente_correo = models.CharField(max_length=50, null=True, blank=True)
     cli_fecregistro = models.DateTimeField(auto_now=True)
     cli_fecmodificacion = models.DateTimeField(auto_now=True)
 
@@ -72,7 +75,7 @@ class Servicio(models.Model):
     doc_ficha = models.FileField(upload_to="fichas/", null=True, blank=True)
 
     def __str__(self):
-        return self.tipo.tserv_nombre
+        return self.tipo.servicio_nombre
 
 
 class Tipo_Documento(models.Model):

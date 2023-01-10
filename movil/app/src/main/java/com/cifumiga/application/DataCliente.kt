@@ -1,84 +1,104 @@
 package com.cifumiga.application
 
+import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
-import com.cifumiga.application.models.Operacion
+import com.cifumiga.application.models.ServicioX
+import com.cifumiga.application.ui.calendar.CalendarActivity
 import kotlinx.android.synthetic.main.activity_data_cliente.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONException
 
 class DataCliente : AppCompatActivity() {
 
-    var id_cliente:Int? = null
+    var llenarLista = ArrayList<ServicioX>()
+    var id_cliente:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_cliente)
 
         val bundle: Bundle?=intent.extras
-        id_cliente = bundle?.getInt("id")
+        id_cliente = bundle?.getString("id")
         nombre_cliente.setText(bundle?.getString("nombre"))
+        this.title = bundle?.getString("nombre")
         ruc_cliente.setText(bundle?.getString("ruc"))
+        txtContactoOp.setText(bundle?.getString("contacto"))
+        txtTelefonoOp.setText(bundle?.getString("telefono"))
+        txtCorreoOp.setText(bundle?.getString("correo"))
 
-        getOperaciones()
+        btnAddService.setOnClickListener(){
+            val intent = Intent(this, AddServicio::class.java)
+            intent.putExtra("id_cliente", id_cliente)
+            startActivity(intent)
+        }
 
         getServicio()
 
-    }
 
-    private fun getServicio() {
 
     }
 
-    private fun getOperaciones() {
-        val lista = lista_operaciones
+    fun getServicio() {
+        val lista = lista_servicios
         lista.layoutManager = LinearLayoutManager(this)
-        var llenarLista = ArrayList<Operacion>()
-        val adapter = AdaptadorOperacion(llenarLista)
+        val adapter = AdaptadorServicios(llenarLista)
         adapter.notifyDataSetChanged()
+        CoroutineScope(Dispatchers.IO).launch{
+            AsyncTask.execute{
+                val queue = Volley.newRequestQueue(this@DataCliente)
+                val url = getString(R.string.urlAPI) + "/services/cliente/" + id_cliente
+                val stringRequest = JsonArrayRequest(url,
+                    Response.Listener { response ->
+                        try {
+                            for (i in 0 until response.length()) {
+                                val id =
+                                    response.getJSONObject(i).getInt("id")
+                                val descripicion =
+                                    response.getJSONObject(i).getString("servicio_desc")
+                                var area =
+                                    response.getJSONObject(i).getString("servicio_area").toString()
+                                var dimension =
+                                    response.getJSONObject(i).getString("servicio_dim").toString()
+                                var frecuencia =
+                                    response.getJSONObject(i).getString("servicio_frec").toString()
+                                var precio =
+                                    response.getJSONObject(i).getString("servicio_precio").toString()
+                                var tipo =
+                                    response.getJSONObject(i).getString("tipo").toString()
+                                var cliente =
+                                    response.getJSONObject(i).getInt("cliente")
+                                llenarLista.add(ServicioX(id,descripicion, area, dimension, frecuencia, precio, tipo, cliente))
+                            }
+                            lista.adapter = adapter
 
-        AsyncTask.execute{
+                        } catch (e: JSONException) {
+                            Toast.makeText(
+                                this@DataCliente,
+                                "Error al obtener los datos",
+                                Toast.LENGTH_LONG
+                            ).show()
 
-            val queue = Volley.newRequestQueue(this@DataCliente)
-            val url = getString(R.string.urlAPI) + "/operaciones/cliente/" + id_cliente.toString()
-            val stringRequest = JsonArrayRequest(url,
-                Response.Listener { response ->
-                    try {
-                        for (i in 0 until response.length()) {
-                            val id =
-                                response.getJSONObject(i).getInt("id")
-                            val contacto =
-                                response.getJSONObject(i).getString("operacion_contacto")
-                            var correo =
-                                response.getJSONObject(i).getString("operacion_correo ")
-                            var cliente =
-                                response.getJSONObject(i).getInt("cliente")
-                            llenarLista.add(Operacion(id,contacto, correo,cliente))
                         }
-                        lista.adapter = adapter
-                    } catch (e: JSONException) {
+                    }, Response.ErrorListener {
                         Toast.makeText(
                             this@DataCliente,
-                            "Error al obtener los datos",
+                            "Verifique que esté conectado a internet",
                             Toast.LENGTH_LONG
                         ).show()
 
-                    }
-                }, Response.ErrorListener {
-                    Toast.makeText(
-                        this@DataCliente,
-                        "Verifique que esta conectado a internet",
-                        Toast.LENGTH_LONG
-                    ).show()
-
-                })
-            queue.add(stringRequest)
+                    })
+                queue.add(stringRequest)
+            }
         }
     }
 

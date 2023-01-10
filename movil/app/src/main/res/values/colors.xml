@@ -18,4 +18,5 @@
     <color name="red_danger">#F44336</color>
     <color name="green_500">#397C40</color>
     <color name="transparent">#ED000000</color>
+    <color name="transparent_gray">#57919191</color>
 </resources>
