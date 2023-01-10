@@ -96,27 +96,27 @@ WSGI_APPLICATION = 'app.wsgi.application'
 #}
 
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'onrender',
-#        'USER': 'employeecifumiga',
-#        'PASSWORD': 'ab1c6cd9c989629dbba21d9bb2a8c95b',
-#        'HOST': 'c1fum1g4-apirest.onrender.com',
-#        'PORT': '10000',
-#    }
-#}
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cifumiga_db_local',
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': 'onrender',
+        'USER': 'employeecifumiga',
+        'PASSWORD': 'ab1c6cd9c989629dbba21d9bb2a8c95b',
+        'HOST': 'c1fum1g4-apirest.onrender.com',
+        'PORT': '10000',
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'cifumiga_db_local',
+#        'USER': 'root',
+#        'PASSWORD': '1234',
+#        'HOST': 'localhost',
+#        'PORT': '3306',
+#    }
+#}
 
 
 
