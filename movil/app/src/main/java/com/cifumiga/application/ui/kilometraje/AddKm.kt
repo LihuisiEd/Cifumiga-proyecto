@@ -1,4 +1,4 @@
-package com.cifumiga.application
+package com.cifumiga.application.ui.kilometraje
 
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +11,8 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.cifumiga.application.R
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_km.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -22,14 +24,15 @@ class AddKm : AppCompatActivity() {
 
     var cal = Calendar.getInstance()
     var id_empleado:String? = null
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_km)
 
-        val bundle :Bundle?=intent.extras
-        id_empleado = bundle?.getString("id")
 
+        val bundle: Bundle ? = intent.extras
+        val email = bundle?.getString("email")
 
         val dateSetListener = object : DatePickerDialog.OnDateSetListener {
             override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int,
@@ -54,8 +57,27 @@ class AddKm : AppCompatActivity() {
 
 
         bdSaveKM.setOnClickListener(){
-            subirKilometraje()
+            val placa = txtPlacaKM.text.toString().trim()
+            if (placa.isEmpty()){
+                txtPlacaKM.error = "Campo requerido"
+                showError("Debes llenar la placa del vehículo")
+            } else {
+                val kilometraje = hashMapOf(
+                    "fecha" to txtFecKM.text.toString(),
+                    "placa" to placa,
+                    "inicial" to txtInicioKM.text.toString(),
+                    "final" to txtFinKM.text.toString(),
+                    "total" to txtTotalKM.text.toString(),
+                    "empleado" to email.toString()
+                )
+                db.collection("kilometrajes").document(placa)
+                    .set(kilometraje)
+                    .addOnSuccessListener { showError("Guardado con éxito") }
+                    .addOnFailureListener { showError("Problemas al guardar") }
+            }
+
         }
+
 
         bdCalcularKM.setOnClickListener(){
             calcularKM()
@@ -64,66 +86,34 @@ class AddKm : AppCompatActivity() {
     }
 
     private fun calcularKM() {
-        val inicio = txtInicioKM.text.toString().trim()
-        val fin = txtFinKM.text.toString().trim()
-        if (fin.isNotEmpty() || inicio.isNotEmpty()){
-            val ope = inicio.toDouble() - fin.toDouble()
-            val opeOff = (ope * 100.0).roundToInt() /100.0
-            txtTotalKM.setText(opeOff.toString())
-        }
-    }
-
-    private fun subirKilometraje() {
-        val fecha = txtFecKM.text.toString().trim()
-        val inicio = txtInicioKM.text.toString().trim()
-        val fin = txtFinKM.text.toString().trim()
-        val total = txtTotalKM.text.toString().trim()
-        val placa = txtPlacaKM.text.toString().trim()
-        if (fecha.isEmpty() || inicio.isEmpty() || fin.isEmpty() || placa.isEmpty()){
-            alertError("Asegúrate de llenar todos los campos")
-        }
-        if (fecha.isEmpty()){
-            txtFecKM.error = "Fecha requerida"
-        }
+        var inicio = txtInicioKM.text.toString().trim()
+        var fin = txtFinKM.text.toString().trim()
         if (inicio.isEmpty()){
-            txtInicioKM.error = "Campo requerido"
+            txtInicioKM.error = "Campo necesario"
+            txtInicioKM.requestFocus()
+            return
         }
         if (fin.isEmpty()){
-            txtFinKM.error = "Campo requerido"
+            txtFinKM.error = "Campo necesario"
+            txtInicioKM.requestFocus()
+            return
         }
-
-        if (placa.isEmpty()){
-            txtPlacaKM.error = "Placa requerida"
+        if (fin.isEmpty() || inicio.isEmpty()){
+            txtInicioKM.error = "Campo necesario"
+            txtFinKM.error = "Campo necesario"
+            showError("Antes de calcular el resultado, llena ambos km")
+        }
+        if (inicio.toInt() < fin.toInt()){
+            showError("El Km final no puede ser mayor al inicial")
         } else {
-            val queue = Volley.newRequestQueue(this)
-            val url = getString(R.string.urlAPI) + "/kilometrajes/"
-            val jsonObj = JSONObject()
-
-            jsonObj.put("fecha", fecha )
-            jsonObj.put("placa", placa)
-            jsonObj.put("kilometraje_inicio", inicio)
-            jsonObj.put("kilometraje_fin", fin)
-            jsonObj.put("kilometraje_total", total)
-            jsonObj.put("empleado", id_empleado)
-
-            val stringRequest = JsonObjectRequest(
-                Request.Method.POST, url,jsonObj,
-                Response.Listener { response ->
-                    try {
-                        showError("Kilometraje agregado con éxito")
-                    } catch (e: JSONException){
-                        showError("Datos incorrectos")
-                    }
-                }, Response.ErrorListener {
-                    showError("Problemas de conexión, revisa tu conexión a internet")
-                })
-            queue.add(stringRequest)
-
+            val ope = txtInicioKM.text.toString().trim().toInt() - txtFinKM.text.toString().trim().toInt()
+            txtTotalKM.setText(ope.toString())
         }
     }
 
+
     private fun updateDateInView() {
-        val myFormat = "yyy-MM-dd" // mention the format you need
+        val myFormat = "dd-MM-yyyy" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         txtFecKM.setText(sdf.format(cal.getTime()))
     }

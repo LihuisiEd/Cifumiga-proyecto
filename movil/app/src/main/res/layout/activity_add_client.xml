@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddClient">
+    tools:context=".ui.clients.AddClient">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,37 +12,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout4"
+
+            <EditText
+                android:id="@+id/txtAddName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:hint="@string/ruc">
+                android:inputType="textPersonName"
+                android:hint="@string/nombre_del_cliente"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtAddRuc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout5"
+            <EditText
+                android:id="@+id/txtAddRuc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:hint="@string/nombre_del_cliente">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtAddName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:inputType="number"
+                android:hint="@string/ruc"/>
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider_ope"
@@ -67,74 +56,50 @@
                 android:textSize="12sp"
                 android:text="Los siguientes campos no son requeridos" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout6"
+            <EditText
+                android:id="@+id/txtAddContacto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:hint="@string/contacto">
+                android:inputType="textPersonName"
+                android:hint="@string/contacto"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtAddContacto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout7"
+            <EditText
+                android:id="@+id/txtAddTelefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:hint="@string/telefono"
-                >
+                android:inputType="phone"
+                android:hint="@string/telefono"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtAddTelefono"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout8"
+            <EditText
+                android:id="@+id/txtAddCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:hint="@string/correo">
+                android:inputType="textEmailAddress"
+                android:hint="@string/correo"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtAddCorreo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/bdAddClient"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
+                android:fontFamily="@font/nunito_bold"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
+                app:cornerRadius="100dp"
                 android:layout_marginEnd="24dp"
-                android:text="@string/agregar_cliente"
+                android:text="@string/guardar"
                 />
 
-            <Button
-                android:id="@+id/bdUpdateClient"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:backgroundTint="@color/blue_500"
-                android:text="@string/actualizar_cliente"
-                />
+
         </LinearLayout>
     </ScrollView>
 

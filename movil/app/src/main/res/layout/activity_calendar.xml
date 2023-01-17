@@ -24,12 +24,14 @@
                 android:id="@+id/btnSelectFec"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
-                android:drawableLeft="@drawable/ic_calendar"
-                android:backgroundTint="@color/blue_200"
-                android:drawableTint="@color/white"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
+                app:cornerRadius="100dp"
+                android:backgroundTint="@color/blue_200"
+                android:drawableLeft="@drawable/ic_calendar"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/nunito_bold"
                 android:text="@string/seleccionar_fecha" />
 
             <EditText
@@ -99,6 +101,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lista_tramites"
+                tools:listitem="@layout/tramites_elements"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

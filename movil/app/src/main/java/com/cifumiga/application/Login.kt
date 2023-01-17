@@ -11,13 +11,18 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.auth0.android.jwt.JWT
 import com.cifumiga.application.R
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_perfil.*
 import org.json.JSONException
 import org.json.JSONObject
 
 class Login : AppCompatActivity() {
 
     var JWTtoken = ""
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,70 +31,61 @@ class Login : AppCompatActivity() {
         setTheme(R.style.Theme_MyApplication_NoActionBar)
         setContentView(R.layout.activity_login)
 
-        val policy =
-            StrictMode.ThreadPolicy.Builder().permitAll().build()
-        StrictMode.setThreadPolicy(policy)
+        setup()
+
+    }
+
+    private fun setup() {
+        sign.setOnClickListener(){
+            if (emailEditTXT.text.isNotEmpty() && passEditTXT.text.isNotEmpty()) {
+                FirebaseAuth.getInstance()
+                    .createUserWithEmailAndPassword(emailEditTXT.text.toString(),
+                        passEditTXT.text.toString()).addOnCompleteListener{
+                        if (it.isSuccessful){
+                            db.collection("usuarios").document(emailEditTXT.text.toString()).set(
+                                hashMapOf(
+                                    "permiso" to "user")
+                            )
+                            showHome(it.result.user?.email ?: "", ProviderType.BASIC)
+                        } else {
+                            showError("No se pudo ingresar")
+                        }
+                    }
+            } else{
+                showError("Llena las credenciales por favor")
+            }
+        }
 
         login.setOnClickListener(){
-            loginValidate()
-            //ingresarPrueba()
-        }
-
-        go_register.setOnClickListener(){
-            val intent = Intent(this, Register::class.java)
-            startActivity(intent)
-        }
-
-    }
-
-    private fun loginValidate() {
-        val email = login_correo.text.toString()
-        val pass = login_password.text.toString()
-        if(email.isEmpty()){
-            login_correo.error = "Correo requerido"
-            login_correo.requestFocus()
-        }
-        if (pass.isEmpty()){
-            login_password.error = "Contraseña requerida"
-            login_password.requestFocus()
-        }
-        else{
-            val queue = Volley.newRequestQueue(this)
-            val url = getString(R.string.urlAPI) + "/login/"
-            val jsonObj = JSONObject()
-            jsonObj.put("email", email)
-            jsonObj.put("password",pass)
-
-            val stringRequest =  JsonObjectRequest(
-                Request.Method.POST, url,jsonObj,
-                Response.Listener { response ->
-                    try{
-                        JWTtoken = response.getString("jwt")
-                        openProfile(JWTtoken)
-                    } catch (e: JSONException){
-                        showError("Hey, estos datos no van")
+            if (emailEditTXT.text.isNotEmpty() && passEditTXT.text.isNotEmpty()) {
+                FirebaseAuth.getInstance()
+                    .signInWithEmailAndPassword(emailEditTXT.text.toString(),
+                        passEditTXT.text.toString()).addOnCompleteListener{
+                        if (it.isSuccessful){
+                            showHome(it.result.user?.email ?: "", ProviderType.BASIC)
+                        } else {
+                            showError("No se pudo ingresar")
+                        }
                     }
-                }, Response.ErrorListener {
-                    showError("Revisa los datos ingresados, o revisa tu conexión a internet")
-                })
-            queue.add(stringRequest)
+            } else{
+                showError("Llena las credenciales por favor")
+            }
+
         }
+
     }
 
-    private fun openProfile(jwTtoken: String) {
+    private fun showHome(email:String, provider: ProviderType){
         val intent = Intent(this, MainActivity::class.java)
-        var jwt: JWT = JWT(this.JWTtoken)
-        val user_id = jwt.getClaim("id").asInt()
-        val user_name = jwt.getClaim("name").asString().toString()
-
         val datos = getSharedPreferences("DatosUsuario", MODE_PRIVATE)
         val editor = datos.edit()
-        editor.putString("id",user_id.toString())
-        editor.putString("user_name", user_name)
+        editor.putString("email",email)
+        editor.putString("provider", provider.name)
         editor.apply()
         startActivity(intent)
-        finish()
+
     }
+
 
     private fun showError(s:String){
         Toast.makeText(this, s, Toast.LENGTH_LONG).show()

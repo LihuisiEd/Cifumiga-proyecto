@@ -1,18 +1,19 @@
 package com.cifumiga.application.models
 
 data class Tramite(
-    val id: Int,
-    val cliente: String,
-    val tipo: String,
-    val direccion: String,
-    val referencia: String,
-    val tramite_contacto: String,
-    val tramite_telefono: String,
-    val tramite_fecha: String,
-    val tramite_nivel_1: Boolean,
-    val tramite_nivel_2: Boolean,
-    val tramite_nivel_3: Boolean,
-    val tramite_nivel_4: Boolean,
-    val problemas: String,
-    val condicion_subestandar: String
+    val id:String?= "",
+    val cliente: String?="",
+    val tipo: String?="",
+    val direccion: String?="",
+    val referencia: String?="",
+    val contacto: String?="",
+    val telefono: String?="",
+    val fecha: String?="",
+    val frecuencia: String?= "",
+    val nivel_1: String?="",
+    val nivel_2: String?="",
+    val nivel_3: String?="",
+    val nivel_4: String?="",
+    val problemas: String?="",
+    val condicion: String?="",
 )

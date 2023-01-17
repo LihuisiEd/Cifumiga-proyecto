@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "148194308000",
+    "project_id": "cifumiga-41f0c",
+    "storage_bucket": "cifumiga-41f0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148194308000:android:9a67e85efd566343923ec5",
+        "android_client_info": {
+          "package_name": "com.cifumiga.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148194308000-goiftjujndt6tufbcfuiir2v95v5qf5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFOqt98LBX4Pp7ol8hSynjD3Vi-nYL4Fk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "148194308000-goiftjujndt6tufbcfuiir2v95v5qf5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

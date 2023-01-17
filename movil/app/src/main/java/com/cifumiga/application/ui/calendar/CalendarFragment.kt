@@ -2,28 +2,19 @@ package com.cifumiga.application.ui.calendar
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.Volley
 import com.cifumiga.application.*
 import com.cifumiga.application.databinding.FragmentCalendarBinding
 import com.cifumiga.application.models.Tramite
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.json.JSONException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -98,79 +89,7 @@ class CalendarFragment : Fragment() {
         var llenarLista = ArrayList<Tramite>()
         val adapter = AdaptadorTramite(llenarLista)
 
-        val fechafiltro = view.findViewById<EditText>(R.id.FiltroxFecha)
-        fechafiltro.addTextChangedListener{ fechaFilter ->
-            val llenarlistaFechas = llenarLista.filter {
-                    fecha -> fecha.tramite_fecha.lowercase().contains(fechaFilter.toString().lowercase()) }
-            adapter.updateClientList(llenarlistaFechas as ArrayList<Tramite>)
-            if (llenarlistaFechas.isEmpty()){
-                mensaje.visibility = View.VISIBLE
-            } else {
-                mensaje.visibility = View.GONE
-            }
-        }
 
-
-        CoroutineScope(Dispatchers.IO).launch{
-            AsyncTask.execute{
-                swipeconfig(swipe)
-                val queue = Volley.newRequestQueue(activity)
-                val url = getString(R.string.urlAPI) + "/tramites/"
-                val stringRequest = JsonArrayRequest(url,
-                    Response.Listener { response ->
-                        try {
-                            for (i in 0 until response.length()) {
-                                val id =
-                                    response.getJSONObject(i).getInt("id")
-                                val fecha =
-                                    response.getJSONObject(i).getString("tramite_fecha")
-                                val direccion =
-                                    response.getJSONObject(i).getString("direccion")
-                                val referencia =
-                                    response.getJSONObject(i).getString("referencia")
-                                var contacto =
-                                    response.getJSONObject(i).getString("tramite_contacto").toString()
-                                var telefono =
-                                    response.getJSONObject(i).getString("tramite_telefono").toString()
-                                var tipo_n1 =
-                                    response.getJSONObject(i).getBoolean("tramite_nivel_1")
-                                var tipo_n2 =
-                                    response.getJSONObject(i).getBoolean("tramite_nivel_2")
-                                var tipo_n3 =
-                                    response.getJSONObject(i).getBoolean("tramite_nivel_3")
-                                var tipo_n4 =
-                                    response.getJSONObject(i).getBoolean("tramite_nivel_4")
-                                var problemas =
-                                    response.getJSONObject(i).getString("problemas")
-                                var condicion_subestandar =
-                                    response.getJSONObject(i).getString("condicion_subestandar")
-                                var tipo =
-                                    response.getJSONObject(i).getString("tipo").toString()
-                                var cliente =
-                                    response.getJSONObject(i).getString("cliente").toString()
-                                llenarLista.add(Tramite(id,cliente, tipo,direccion,referencia,contacto,telefono,fecha,tipo_n1,tipo_n2,tipo_n3,tipo_n4,problemas,condicion_subestandar))
-                            }
-                            lista?.adapter = adapter
-                            swipeEnd(swipe)
-                        } catch (e: JSONException) {
-                            Toast.makeText(
-                                activity,
-                                "Error al obtener los datos",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            swipeEnd(swipe)
-                        }
-                    }, Response.ErrorListener {
-                        Toast.makeText(
-                            activity,
-                            "Verifique que esta conectado a internet",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        swipeEnd(swipe)
-                    })
-                queue.add(stringRequest)
-            }
-        }
 
     }
 

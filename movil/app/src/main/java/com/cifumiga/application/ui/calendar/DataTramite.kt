@@ -1,4 +1,4 @@
-package com.cifumiga.application
+package com.cifumiga.application.ui.calendar
 
 import android.content.Intent
 import android.os.AsyncTask
@@ -6,14 +6,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.StrictMode
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.cifumiga.application.MainActivity
+import com.cifumiga.application.R
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_data_tramite.*
 
 class DataTramite : AppCompatActivity() {
+
+    private val db = FirebaseFirestore.getInstance()
+    var id: String?=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data_tramite)
@@ -24,12 +32,14 @@ class DataTramite : AppCompatActivity() {
 
         val bundle :Bundle ?=intent.extras
 
-        val id_tramite = bundle?.getString("id")
+        id = bundle?.getString("id")
+        id_Tramite.text = bundle?.getString("id")
         fec_Tramite.text = bundle?.getString("fecha")
         cliente_tramite.text = bundle?.getString("cliente")
         contact_Tramite.text = bundle?.getString("contacto")
         telefono_Tramite.text = bundle?.getString("telefono")
         direccion_Tramite.text = bundle?.getString("direccion")
+        frecuencia_Tramite.text = bundle?.getString("frecuencia")
         referencia_Tramite.text = bundle?.getString("referencia")
         typeServ_Tramite.text = bundle?.getString("tipo")
         problemas_Tramite.text = bundle?.getString("problemas")
@@ -62,17 +72,19 @@ class DataTramite : AppCompatActivity() {
         }
 
         btnDeleteTram.setOnClickListener(){
-            alertEliminar("¿Seguro quieres eliminar este trámite?", id_tramite.toString() )
+            alertEliminar(getString(R.string.titulo_alerta_seguridad),
+                getString(R.string.mensaje_eliminar_registro))
         }
 
     }
 
-    private fun alertEliminar(s: String, id_tramite:String) {
+    private fun alertEliminar(t:String, s: String)  {
         val alertDialogBuilder = AlertDialog.Builder(this)
-            .setTitle("Eliminar trámite")
+            .setTitle(t)
             .setMessage(s)
             .setPositiveButton("Si", { dialog, whichButton ->
-                eliminarTramite(id_tramite)
+                db.collection("tramites").document(id.toString()).delete()
+                showError(getString(R.string.registro_eliminado))
             })
             .setNegativeButton("No", { dialog, whichButton ->
                 dialog.dismiss()
@@ -80,24 +92,8 @@ class DataTramite : AppCompatActivity() {
             .show()
     }
 
-    fun eliminarTramite(id:String) {
-        AsyncTask.execute {
-            val queue = Volley.newRequestQueue(this)
-            var url = getString(R.string.urlAPI) + "/tramites/" + id
-            val postRequest: StringRequest = object : StringRequest(
-                Request.Method.DELETE, url,
-                Response.Listener { response -> // response
 
-                },
-                Response.ErrorListener { response ->// error
-
-                }
-            ){}
-            queue.add(postRequest)
-        }
-        val regresar = Intent(this, MainActivity::class.java)
-        startActivity(regresar)
+    private fun showError(s:String){
+        Toast.makeText(this, s, Toast.LENGTH_LONG).show()
     }
-
-
 }

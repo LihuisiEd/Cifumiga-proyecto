@@ -1,11 +1,13 @@
 package com.cifumiga.application.models
 
+import com.google.firebase.Timestamp
+import java.time.Instant
+
 data class Kilometraje(
-    val id: Int,
-    val empleado: Int,
-    val fecha: String,
-    val placa: String,
-    val kilometraje_fin: String,
-    val kilometraje_inicio: String,
-    val kilometraje_total: String
+    val placa: String? = "",
+    val inicial: String? = "0",
+    val final: String? = "0",
+    val total: String? = "0",
+    val fecha: String? = "",
+    val empleado: String? = ""
 )
