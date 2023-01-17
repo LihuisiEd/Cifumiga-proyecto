@@ -16,41 +16,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".UpdateServicio"
-            android:parentActivityName=".ui.clients.ClientesActivity"
-            android:label="Modificar Servicio"
+            android:name=".ui.calendar.UpdateTramite"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".DataServicio"
-            android:label="Servicio"
-            android:parentActivityName=".ui.clients.ClientesActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".AddServicio"
-            android:parentActivityName=".ui.clients.ClientesActivity"
-            android:label="@string/agregar_servicio"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".DataKilometraje"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".UpdateKM"
+            android:name=".ui.perfil.PerfilActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -58,7 +31,50 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddKm"
+            android:name=".ui.services.UpdateServicio"
+            android:exported="false"
+            android:label="Modificar Servicio"
+            android:parentActivityName=".ui.clients.ClientesActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.services.DataServicio"
+            android:exported="false"
+            android:label="Servicio"
+            android:parentActivityName=".ui.clients.ClientesActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.services.AddServicio"
+            android:exported="false"
+            android:label="@string/agregar_servicio"
+            android:parentActivityName=".ui.clients.ClientesActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.kilometraje.DataKilometraje"
+            android:exported="false"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.kilometraje.UpdateKM"
+            android:exported="false"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.kilometraje.AddKm"
             android:exported="false"
             android:label="@string/agregar_kilometraje"
             android:parentActivityName=".MainActivity">
@@ -94,7 +110,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".DataCliente"
+            android:name=".ui.clients.DataCliente"
             android:exported="false"
             android:parentActivityName=".ui.clients.ClientesActivity">
             <meta-data
@@ -102,7 +118,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddTramite"
+            android:name=".ui.calendar.AddTramite"
             android:exported="false"
             android:parentActivityName=".ui.calendar.CalendarActivity">
             <meta-data
@@ -110,7 +126,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".DataTramite"
+            android:name=".ui.calendar.DataTramite"
             android:exported="false"
             android:label="@string/calendar"
             android:parentActivityName=".ui.calendar.CalendarActivity">
@@ -119,7 +135,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddClient"
+            android:name=".ui.clients.AddClient"
             android:exported="false"
             android:label="@string/agregar_cliente"
             android:parentActivityName=".ui.clients.ClientesActivity">
@@ -157,6 +173,14 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

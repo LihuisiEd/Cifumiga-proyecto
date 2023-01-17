@@ -1,4 +1,4 @@
-package com.cifumiga.application
+package com.cifumiga.application.ui.kilometraje
 
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -7,22 +7,20 @@ import android.view.View
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import com.cifumiga.application.R
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_update_km.*
-import org.json.JSONException
-import org.json.JSONObject
+
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
 class UpdateKM : AppCompatActivity() {
 
+    private val db = FirebaseFirestore.getInstance()
     var cal = Calendar.getInstance()
-    var id_empleado:Int? = null
-    var id_kilometraje:Int? = null
+    var placa:String? = ""
+    var empleado:String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,11 +48,13 @@ class UpdateKM : AppCompatActivity() {
         })
 
         val bundle :Bundle ?=intent.extras
-        id_empleado = bundle?.getInt("empleado")
-        id_kilometraje = bundle?.getInt("id")
+        placa = bundle?.getString("placa")
+
 
         if (bundle!=null){
             this.title = getString(R.string.modificar_kilometraje)
+            txtPlacaKM.isEnabled = false
+            empleado = bundle.getString("empleado").toString()
             txtFecKM.setText(bundle.getString("fecha").toString())
             txtPlacaKM.setText(bundle.getString("placa").toString())
             txtInicioKM.setText(bundle.getString("inicio").toString())
@@ -63,7 +63,19 @@ class UpdateKM : AppCompatActivity() {
         }
 
         bdUpdateKM.setOnClickListener(){
-            updateKm()
+            val placa = txtPlacaKM.text.toString()
+            val kilometraje = hashMapOf(
+                "fecha" to txtFecKM.text.toString(),
+                "placa" to placa,
+                "inicial" to txtInicioKM.text.toString(),
+                "final" to txtFinKM.text.toString(),
+                "total" to txtTotalKM.text.toString(),
+                "empleado" to empleado.toString()
+            )
+            db.collection("kilometrajes").document(placa)
+                .set(kilometraje)
+                .addOnSuccessListener { showError("Guardado con éxito") }
+                .addOnFailureListener { showError("Problemas al guardar") }
         }
 
         bdCalcularKM.setOnClickListener(){
@@ -82,57 +94,10 @@ class UpdateKM : AppCompatActivity() {
         }
     }
 
-    private fun updateKm() {
-        val fecha = txtFecKM.text.toString().trim()
-        val inicio = txtInicioKM.text.toString().trim()
-        val fin = txtFinKM.text.toString().trim()
-        val total = txtTotalKM.text.toString().trim()
-        val placa = txtPlacaKM.text.toString().trim()
-        if (fecha.isEmpty() || inicio.isEmpty() || fin.isEmpty() || placa.isEmpty()){
-            alertError("Asegúrate de llenar todos los campos")
-        }
-        if (fecha.isEmpty()){
-            txtFecKM.error = "Fecha requerida"
-        }
-        if (inicio.isEmpty()){
-            txtInicioKM.error = "Campo requerido"
-        }
-        if (fin.isEmpty()){
-            txtFinKM.error = "Campo requerido"
-        }
 
-        if (placa.isEmpty()){
-            txtPlacaKM.error = "Placa requerida"
-        } else {
-            val queue = Volley.newRequestQueue(this)
-            val url = getString(R.string.urlAPI) + "/kilometrajes/" + id_kilometraje.toString()
-            val jsonObj = JSONObject()
-
-            jsonObj.put("fecha", fecha )
-            jsonObj.put("placa", placa)
-            jsonObj.put("kilometraje_inicio", inicio)
-            jsonObj.put("kilometraje_fin", fin)
-            jsonObj.put("kilometraje_total", total)
-            jsonObj.put("empleado", id_empleado)
-
-            val stringRequest = JsonObjectRequest(
-                Request.Method.PUT, url,jsonObj,
-                Response.Listener { response ->
-                    try {
-                        showError("Kilometraje agregado con éxito")
-                    } catch (e: JSONException){
-                        showError("Datos incorrectos")
-                    }
-                }, Response.ErrorListener {
-                    showError("Problemas de conexión, revisa tu conexión a internet")
-                })
-            queue.add(stringRequest)
-
-        }
-    }
 
     private fun updateDateInView() {
-        val myFormat = "yyy-MM-dd" // mention the format you need
+        val myFormat = "dd-MM-yyyy" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         txtFecKM.setText(sdf.format(cal.getTime()))
     }

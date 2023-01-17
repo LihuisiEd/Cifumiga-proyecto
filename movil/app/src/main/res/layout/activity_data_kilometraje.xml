@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DataKilometraje">
+    tools:context=".ui.kilometraje.DataKilometraje">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,120 +12,140 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <LinearLayout
-                android:backgroundTint="@color/transparent_gray"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/corners_layout"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/fecha" />
-
-                <TextView
-                    android:id="@+id/fec_kilometraje"
+                android:layout_marginTop="16dp"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-            <LinearLayout
-                android:backgroundTint="@color/transparent_gray"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/fecha" />
+
+                    <TextView
+                        android:id="@+id/fec_kilometraje"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/corners_layout"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/placa" />
-
-                <TextView
-                    android:id="@+id/placa_kilometraje"
+                android:layout_marginTop="16dp"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/placa" />
 
-            <LinearLayout
+                    <TextView
+                        android:id="@+id/placa_kilometraje"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/corners_layout"
-                android:backgroundTint="@color/transparent_gray"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/km_inicial" />
-
-                <TextView
-                    android:id="@+id/kminicial_kilometraje"
+                android:layout_marginTop="16dp"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-            <LinearLayout
-                android:backgroundTint="@color/transparent_gray"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/km_inicial" />
+
+                    <TextView
+                        android:id="@+id/kminicial_kilometraje"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/corners_layout"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/km_final" />
-
-                <TextView
-                    android:id="@+id/kmfinal_kilometraje"
+                android:layout_marginTop="16dp"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-            <LinearLayout
-                android:backgroundTint="@color/transparent_gray"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/km_final" />
+
+                    <TextView
+                        android:id="@+id/kmfinal_kilometraje"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/corners_layout"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/resultado" />
-
-                <TextView
-                    android:id="@+id/kmtotal_kilometraje"
+                android:layout_marginTop="16dp"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/resultado" />
+
+                    <TextView
+                        android:id="@+id/kmtotal_kilometraje"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
 
             <Button
                 android:id="@+id/btnDeleteKM"
@@ -134,6 +154,8 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
+                app:cornerRadius="100dp"
+                android:fontFamily="@font/nunito_bold"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/red_danger"
                 android:text="@string/eliminar_kilometraje"/>

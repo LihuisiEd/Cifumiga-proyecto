@@ -8,6 +8,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cifumiga.application.models.Cliente
+import com.cifumiga.application.ui.clients.AddClient
+import com.cifumiga.application.ui.clients.DataCliente
 
 class AdaptadorClientes(var Lista: ArrayList<Cliente>):
     RecyclerView.Adapter<AdaptadorClientes.ViewHolder>() {
@@ -28,18 +30,17 @@ class AdaptadorClientes(var Lista: ArrayList<Cliente>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder?.fNombre?.text=Lista[position].cliente_nombre
-        holder?.fRuc?.text=Lista[position].cliente_ruc
-        var id = Lista[position].id
-        var nombre = Lista[position].cliente_nombre
-        var ruc = Lista[position].cliente_ruc
-        var contacto = Lista[position].cliente_contacto
-        var telefono = Lista[position].cliente_telefono
-        var correo = Lista[position].cliente_correo
+        holder?.fNombre?.text=Lista[position].nombre
+        holder?.fRuc?.text=Lista[position].ruc
 
-        holder.itemView.setOnClickListener(){
+        var nombre = Lista[position].nombre
+        var ruc = Lista[position].ruc
+        var contacto = Lista[position].contacto
+        var telefono = Lista[position].telefono
+        var correo = Lista[position].correo
+
+        holder.itemView.setOnClickListener{
             val llamaractividad = Intent(holder.itemView.context, DataCliente::class.java)
-            llamaractividad.putExtra("id",id.toString())
             llamaractividad.putExtra("nombre",nombre)
             llamaractividad.putExtra("ruc",ruc)
             llamaractividad.putExtra("contacto",contacto)
@@ -48,9 +49,8 @@ class AdaptadorClientes(var Lista: ArrayList<Cliente>):
             holder.itemView.context.startActivity(llamaractividad)
         }
 
-        holder?.fEditar?.setOnClickListener(){
+        holder.fEditar?.setOnClickListener{
             val llamaractividad = Intent(holder.itemView.context, AddClient::class.java)
-            llamaractividad.putExtra("id",id.toString())
             llamaractividad.putExtra("nombre",nombre)
             llamaractividad.putExtra("ruc",ruc)
             llamaractividad.putExtra("contacto",contacto)

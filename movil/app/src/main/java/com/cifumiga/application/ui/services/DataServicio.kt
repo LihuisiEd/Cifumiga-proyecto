@@ -1,4 +1,4 @@
-package com.cifumiga.application
+package com.cifumiga.application.ui.services
 
 import android.content.Intent
 import android.os.AsyncTask
@@ -10,6 +10,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.cifumiga.application.R
 import com.cifumiga.application.ui.clients.ClientesActivity
 import kotlinx.android.synthetic.main.activity_data_servicio.*
 

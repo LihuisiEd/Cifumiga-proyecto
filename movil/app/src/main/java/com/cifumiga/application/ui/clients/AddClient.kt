@@ -1,4 +1,4 @@
-package com.cifumiga.application
+package com.cifumiga.application.ui.clients
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,11 +8,15 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.cifumiga.application.R
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_client.*
 import org.json.JSONException
 import org.json.JSONObject
 
 class AddClient : AppCompatActivity() {
+
+    private val db = FirebaseFirestore.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_client)
@@ -22,41 +26,36 @@ class AddClient : AppCompatActivity() {
         val correo = txtAddCorreo.text.toString().trim()
 
         val bundle :Bundle ?=intent.extras
-        val id_cliente = bundle?.getString("id").toString()
+
         if(bundle!=null){
             this.setTitle("Editar Cliente");
             txtAddRuc.setText(bundle.getString("ruc").toString())
+            txtAddName.isEnabled = false
             txtAddName.setText(bundle.getString("nombre").toString())
-            if (contacto.isEmpty()){
-                txtAddContacto.setText("Sin contacto")
-            }
-
-            if (telefono.isEmpty()){
-                txtAddTelefono.setText("Sin telefono")
-            }
-
-            if (correo.isEmpty()){
-                txtAddCorreo.setText("Sin correo")
-            }
             txtAddContacto.setText(bundle.getString("contacto").toString())
             txtAddTelefono.setText(bundle.getString("telefono").toString())
             txtAddCorreo.setText(bundle.getString("correo").toString())
-            bdAddClient.setEnabled(false)
-            bdUpdateClient.setEnabled(true)
+
         } else{
             this.setTitle("Agregar Cliente");
-            bdAddClient.setEnabled(true)
-            bdUpdateClient.setEnabled(false)
         }
 
 
         bdAddClient.setOnClickListener(){
-            subirCliente()
+            val nombre = txtAddName.text.toString()
+            val cliente = hashMapOf(
+                "nombre" to txtAddName.text.toString(),
+                "ruc" to txtAddRuc.text.toString(),
+                "contacto" to txtAddContacto.text.toString(),
+                "telefono" to txtAddTelefono.text.toString(),
+                "correo" to txtAddCorreo.text.toString()
+            )
+            db.collection("clientes").document(nombre)
+                .set(cliente)
+                .addOnSuccessListener { showError("Guardado con éxito") }
+                .addOnFailureListener { showError("Problemas al guardar") }
         }
 
-        bdUpdateClient.setOnClickListener(){
-            modCliente(id_cliente)
-        }
 
 
     }
@@ -106,6 +105,7 @@ class AddClient : AppCompatActivity() {
 
     }
 
+    /*
     private fun subirCliente() {
         val ruc = txtAddRuc.text.toString().trim()
         val nombre = txtAddName.text.toString().trim()
@@ -148,6 +148,8 @@ class AddClient : AppCompatActivity() {
         }
     }
 
+
+     */
     private fun showError(s:String){
         Toast.makeText(this, s, Toast.LENGTH_LONG).show()
     }

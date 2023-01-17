@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DataServicio">
+    tools:context=".ui.services.DataServicio">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,143 +12,171 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <LinearLayout
-                android:backgroundTint="@color/transparent_gray"
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/corners_layout"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/tipo_de_servicio" />
-
-                <TextView
-                    android:id="@+id/tipo_servicio"
+                android:layout_marginTop="16dp"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-            <LinearLayout
-                android:backgroundTint="@color/transparent_gray"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/tipo_de_servicio" />
+
+                    <TextView
+                        android:id="@+id/tipo_servicio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/corners_layout"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/area" />
-
-                <TextView
-                    android:id="@+id/area_servicio"
+                android:layout_marginTop="16dp"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-            <LinearLayout
-                android:backgroundTint="@color/transparent_gray"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/area" />
+
+                    <TextView
+                        android:id="@+id/area_servicio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/corners_layout"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/dimension_m" />
-
-                <TextView
-                    android:id="@+id/dimesion_servicio"
+                android:layout_marginTop="16dp"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-            <LinearLayout
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/dimension_m" />
+
+                    <TextView
+                        android:id="@+id/dimesion_servicio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/corners_layout"
-                android:backgroundTint="@color/transparent_gray"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/frecuencia" />
-
-                <TextView
-                    android:id="@+id/frecuencia_servicio"
+                android:layout_marginTop="16dp"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-            <LinearLayout
-                android:backgroundTint="@color/transparent_gray"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/frecuencia" />
+
+                    <TextView
+                        android:id="@+id/frecuencia_servicio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/corners_layout"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/precio" />
-
-                <TextView
-                    android:id="@+id/precio_servicio"
+                android:layout_marginTop="16dp"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-            <LinearLayout
-                android:backgroundTint="@color/transparent_gray"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/precio" />
+
+                    <TextView
+                        android:id="@+id/precio_servicio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/corners_layout"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/descripcion" />
-
-                <TextView
-                    android:id="@+id/desc_servicio"
+                android:layout_marginTop="16dp"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="10dp">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:orientation="vertical"
+                    android:padding="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/descripcion" />
+
+                    <TextView
+                        android:id="@+id/desc_servicio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
 
             <Button
                 android:id="@+id/btnDeleteService"
@@ -157,6 +185,8 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
+                app:cornerRadius="100dp"
+                android:fontFamily="@font/nunito_bold"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/red_danger"
                 android:text="@string/eliminar_servicio"/>

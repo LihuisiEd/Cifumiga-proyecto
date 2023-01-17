@@ -20,11 +20,23 @@
             android:layout_weight="1"
             android:orientation="vertical">
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fecha"
+                android:textSize="12dp"
+                />
+            <TextView
                 android:id="@+id/eleFechaKM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fecha"
                 android:textSize="17dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placa"
+                android:textSize="12dp"
                 />
             <TextView
                 android:id="@+id/elePlacaKM"
@@ -34,17 +46,35 @@
                 android:textSize="17dp"
                 />
             <TextView
-                android:id="@+id/eleInicioKM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Inicio"/>
+                android:text="@string/kilometraje"
+                android:textSize="12dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/eleInicioKM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="15dp"
+                    android:text="Inicio"/>
+                <TextView
+                    android:id="@+id/eleFinKM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="15dp"
+                    android:text="Fin"/>
+            </LinearLayout>
+
             <TextView
-                android:id="@+id/eleFinKM"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Fin"/>
+                android:text="Kilometraje alcanzado"
+                android:textSize="12dp" />
             <TextView
                 android:id="@+id/eleTotalKM"
                 android:layout_width="wrap_content"

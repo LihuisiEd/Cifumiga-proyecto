@@ -1,14 +1,14 @@
-package com.cifumiga.application
+package com.cifumiga.application.ui.calendar
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
+import com.cifumiga.application.R
 import com.cifumiga.application.models.Tramite
 
 class AdaptadorTramite(var Lista:ArrayList<Tramite>): RecyclerView.Adapter<AdaptadorTramite.ViewHolder>(){
@@ -26,25 +26,26 @@ class AdaptadorTramite(var Lista:ArrayList<Tramite>): RecyclerView.Adapter<Adapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.fnombre?.text=Lista[position].cliente
-        holder?.ffecha?.text=Lista[position].tramite_fecha
-        holder?.fcontacto?.text=Lista[position].tramite_contacto
+        holder?.ffecha?.text=Lista[position].fecha
+        holder?.fcontacto?.text=Lista[position].contacto
         val id = Lista[position].id
         val cliente = Lista[position].cliente
         val tipo = Lista[position].tipo
-        val contacto = Lista[position].tramite_contacto
-        val telefono = Lista[position].tramite_telefono
+        val contacto = Lista[position].contacto
+        val telefono = Lista[position].telefono
         val direccion = Lista[position].direccion
         val referencia = Lista[position].referencia
-        val fecha = Lista[position].tramite_fecha
-        val nivel_1 = Lista[position].tramite_nivel_1
-        val nivel_2 = Lista[position].tramite_nivel_2
-        val nivel_3 = Lista[position].tramite_nivel_3
-        val nivel_4 = Lista[position].tramite_nivel_4
+        val frecuencia = Lista[position].frecuencia
+        val fecha = Lista[position].fecha
+        val nivel_1 = Lista[position].nivel_1
+        val nivel_2 = Lista[position].nivel_2
+        val nivel_3 = Lista[position].nivel_3
+        val nivel_4 = Lista[position].nivel_4
         val problemas = Lista[position].problemas
-        val condiciones = Lista[position].condicion_subestandar
+        val condiciones = Lista[position].condicion
         holder.itemView.setOnClickListener(){
             val llamaractividad = Intent(holder.itemView.context, DataTramite::class.java)
-            llamaractividad.putExtra("id",id.toString())
+            llamaractividad.putExtra("id", id)
             llamaractividad.putExtra("cliente", cliente)
             llamaractividad.putExtra("tipo", tipo)
             llamaractividad.putExtra("contacto", contacto)
@@ -52,17 +53,18 @@ class AdaptadorTramite(var Lista:ArrayList<Tramite>): RecyclerView.Adapter<Adapt
             llamaractividad.putExtra("direccion", direccion)
             llamaractividad.putExtra("referencia", referencia)
             llamaractividad.putExtra("fecha", fecha)
-            llamaractividad.putExtra("nivel_1",nivel_1.toString())
-            llamaractividad.putExtra("nivel_2",nivel_2.toString())
-            llamaractividad.putExtra("nivel_3",nivel_3.toString())
-            llamaractividad.putExtra("nivel_4",nivel_4.toString())
+            llamaractividad.putExtra("frecuencia",frecuencia)
+            llamaractividad.putExtra("nivel_1",nivel_1)
+            llamaractividad.putExtra("nivel_2",nivel_2)
+            llamaractividad.putExtra("nivel_3",nivel_3)
+            llamaractividad.putExtra("nivel_4",nivel_4)
             llamaractividad.putExtra("problemas",problemas)
             llamaractividad.putExtra("condiciones",condiciones)
             holder.itemView.context.startActivity(llamaractividad)
         }
         holder.feditar.setOnClickListener(){
-            val llamaractividad = Intent(holder.itemView.context, AddTramite::class.java)
-            llamaractividad.putExtra("id",id.toString())
+            val llamaractividad = Intent(holder.itemView.context, UpdateTramite::class.java)
+            llamaractividad.putExtra("id", id)
             llamaractividad.putExtra("cliente", cliente)
             llamaractividad.putExtra("tipo", tipo)
             llamaractividad.putExtra("contacto", contacto)
@@ -70,10 +72,11 @@ class AdaptadorTramite(var Lista:ArrayList<Tramite>): RecyclerView.Adapter<Adapt
             llamaractividad.putExtra("direccion", direccion)
             llamaractividad.putExtra("referencia", referencia)
             llamaractividad.putExtra("fecha", fecha)
-            llamaractividad.putExtra("nivel_1",nivel_1.toString())
-            llamaractividad.putExtra("nivel_2",nivel_2.toString())
-            llamaractividad.putExtra("nivel_3",nivel_3.toString())
-            llamaractividad.putExtra("nivel_4",nivel_4.toString())
+            llamaractividad.putExtra("frecuencia",frecuencia)
+            llamaractividad.putExtra("nivel_1",nivel_1)
+            llamaractividad.putExtra("nivel_2",nivel_2)
+            llamaractividad.putExtra("nivel_3",nivel_3)
+            llamaractividad.putExtra("nivel_4",nivel_4)
             llamaractividad.putExtra("problemas",problemas)
             llamaractividad.putExtra("condiciones",condiciones)
             holder.itemView.context.startActivity(llamaractividad)

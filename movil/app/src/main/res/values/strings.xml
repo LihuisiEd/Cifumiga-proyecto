@@ -69,4 +69,20 @@
     <string name="precio">Precio</string>
     <string name="precio_s">Precio (S/.)</string>
     <string name="eliminar_servicio">Eliminar servicio</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="correo_electr_nico">Correo electrónico</string>
+    <string name="perfil">Perfil</string>
+    <string name="datos_personales">Datos personales</string>
+    <string name="guardar">Guardar</string>
+    <string name="titulo_alerta_seguridad">Alerta de seguridad</string>
+    <string name="mensaje_eliminar_registro">¿Estas seguro que quieres eliminar este registro?</string>
+    <string name="registro_eliminado">Registro eliminado con éxito</string>
+    <string name="ingresar_como_invitado">Ingresar como invitado</string>
+    <string name="fecha_de_culminaci_n">Fecha de culminación</string>
+    <string name="culminaci_n">Culminación</string>
+    <string name="inicial">Inicial</string>
+    <string name="especificar_tipo">Especificar tipo</string>
+    <string name="nombre">Nombre</string>
+    <string name="celular">Celular</string>
+    <string name="hoja_de_trabajo">Hoja de trabajo</string>
 </resources>

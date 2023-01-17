@@ -2,39 +2,39 @@ package com.cifumiga.application.ui.calendar
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.Volley
-import com.cifumiga.application.AdaptadorTramite
-import com.cifumiga.application.AddTramite
 import com.cifumiga.application.R
 import com.cifumiga.application.models.Tramite
-import kotlinx.android.synthetic.main.fragment_calendar.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import org.json.JSONException
+import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
+import kotlinx.android.synthetic.main.activity_calendar.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CalendarActivity : AppCompatActivity() {
 
+
+    private lateinit var db : FirebaseFirestore
+    private lateinit var tramiteRecyclerView: RecyclerView
+    private lateinit var tramiteArrayList: ArrayList<Tramite>
+    private lateinit var adapter : AdaptadorTramite
     var cal = Calendar.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
         val mensaje = mensaje_fecha
-        val swipe = swipeTramites
 
         val dateSetListener = object : DatePickerDialog.OnDateSetListener {
             override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int,
@@ -62,14 +62,16 @@ class CalendarActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val lista = lista_tramites
-        lista.layoutManager = LinearLayoutManager(this)
-        var llenarLista = ArrayList<Tramite>()
-        val adapter = AdaptadorTramite(llenarLista)
+        tramiteRecyclerView = findViewById<RecyclerView>(R.id.lista_tramites)
+        tramiteRecyclerView.layoutManager = LinearLayoutManager(this)
+        tramiteRecyclerView.setHasFixedSize(true)
+        tramiteArrayList = ArrayList<Tramite>()
+        adapter = AdaptadorTramite(tramiteArrayList)
+        tramiteRecyclerView.adapter = adapter
 
         FiltroxFecha.addTextChangedListener{ fechaFilter ->
-            val llenarlistaFechas = llenarLista.filter {
-                    fecha -> fecha.tramite_fecha.lowercase().contains(fechaFilter.toString().lowercase()) }
+            val llenarlistaFechas = tramiteArrayList.filter {
+                    fecha -> fecha.fecha?.lowercase().toString().contains(fechaFilter.toString().lowercase()) }
             adapter.updateClientList(llenarlistaFechas as ArrayList<Tramite>)
             if (llenarlistaFechas.isEmpty()){
                 mensaje.visibility = View.VISIBLE
@@ -78,71 +80,33 @@ class CalendarActivity : AppCompatActivity() {
             }
         }
 
-        CoroutineScope(Dispatchers.IO).launch{
-            AsyncTask.execute{
-                swipeconfig(swipe)
-                val queue = Volley.newRequestQueue(this@CalendarActivity)
-                val url = getString(R.string.urlAPI) + "/tramites/"
-                val stringRequest = JsonArrayRequest(url,
-                    Response.Listener { response ->
-                        try {
-                            for (i in 0 until response.length()) {
-                                val id =
-                                    response.getJSONObject(i).getInt("id")
-                                val fecha =
-                                    response.getJSONObject(i).getString("tramite_fecha")
-                                val direccion =
-                                    response.getJSONObject(i).getString("direccion")
-                                val referencia =
-                                    response.getJSONObject(i).getString("referencia")
-                                var contacto =
-                                    response.getJSONObject(i).getString("tramite_contacto").toString()
-                                var telefono =
-                                    response.getJSONObject(i).getString("tramite_telefono").toString()
-                                var tipo_n1 =
-                                    response.getJSONObject(i).getBoolean("tramite_nivel_1")
-                                var tipo_n2 =
-                                    response.getJSONObject(i).getBoolean("tramite_nivel_2")
-                                var tipo_n3 =
-                                    response.getJSONObject(i).getBoolean("tramite_nivel_3")
-                                var tipo_n4 =
-                                    response.getJSONObject(i).getBoolean("tramite_nivel_4")
-                                var problemas =
-                                    response.getJSONObject(i).getString("problemas")
-                                var condicion_subestandar =
-                                    response.getJSONObject(i).getString("condicion_subestandar")
-                                var tipo =
-                                    response.getJSONObject(i).getString("tipo").toString()
-                                var cliente =
-                                    response.getJSONObject(i).getString("cliente").toString()
-                                llenarLista.add(Tramite(id,cliente, tipo,direccion,referencia,contacto,telefono,fecha,tipo_n1,tipo_n2,tipo_n3,tipo_n4,problemas,condicion_subestandar))
-                            }
-                            lista?.adapter = adapter
-                            swipeEnd(swipe)
-                        } catch (e: JSONException) {
-                            Toast.makeText(
-                                this@CalendarActivity,
-                                "Error al obtener los datos",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            swipeEnd(swipe)
-                        }
-                    }, Response.ErrorListener {
-                        Toast.makeText(
-                            this@CalendarActivity,
-                            "Verifique que esta conectado a internet",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        swipeEnd(swipe)
-                    })
-                queue.add(stringRequest)
+        getTramitesData()
+
+    }
+
+    private fun getTramitesData() {
+        db = FirebaseFirestore.getInstance()
+        db.collection("tramites").orderBy("cliente", Query.Direction.ASCENDING).
+        addSnapshotListener(object : EventListener<QuerySnapshot> {
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null){
+                    showError("No se logró")
+                    return
+                }
+                for (dc : DocumentChange in value?.documentChanges!!){
+                    if (dc.type == DocumentChange.Type.ADDED){
+                        tramiteArrayList.add(dc.document.toObject(Tramite::class.java))
+                    }
+                }
+                adapter.notifyDataSetChanged()
+
             }
-        }
+        })
 
     }
 
     private fun updateDateInView() {
-        val myFormat = "yyy-MM-dd" // mention the format you need
+        val myFormat = "dd-MM-yyyy" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         txtFecLabel.visibility = View.VISIBLE
         txtFecSelected.setText(sdf.format(cal.getTime()))

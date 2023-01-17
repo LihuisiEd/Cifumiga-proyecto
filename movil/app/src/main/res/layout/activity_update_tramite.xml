@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.calendar.AddTramite">
+    tools:context=".ui.calendar.UpdateTramite">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -36,7 +36,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnFecTram"
+                    android:id="@+id/btnFecTramUp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -49,7 +49,7 @@
                     app:cornerRadius="100dp" />
 
                 <EditText
-                    android:id="@+id/txtFecTram"
+                    android:id="@+id/txtFecTramUp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="24dp"
@@ -80,81 +80,81 @@
             app:layout_constraintTop_toBottomOf="@+id/divider"/>
 
 
-            <TextView
-                android:id="@+id/textview4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:textSize="11sp"
-                android:text="Selecciona el cliente"
-                app:layout_constraintTop_toBottomOf="@+id/textdivider"/>
-            <Spinner
-                android:id="@+id/txtClienTram"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+        <TextView
+            android:id="@+id/textview4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:textSize="11sp"
+            android:text="Selecciona el cliente"
+            app:layout_constraintTop_toBottomOf="@+id/textdivider"/>
+        <Spinner
+            android:id="@+id/txtClienTramUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
 
-                android:layout_marginEnd="24dp"
-                android:inputType="none"
-                app:layout_constraintTop_toBottomOf="@+id/textview4"/>
-
-
-
-            <EditText
-                android:id="@+id/txtContactTram"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:hint="@string/contacto"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtClienTram"/>
-
-
-            <EditText
-                android:id="@+id/txtTelefonoTram"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:hint="@string/telefono"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtContactTram"/>
-
-
-            <EditText
-                android:id="@+id/txtDireccionTram"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:hint="@string/direccion"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:inputType="text"
-                app:layout_constraintTop_toBottomOf="@+id/txtTelefonoTram"/>
+            android:layout_marginEnd="24dp"
+            android:inputType="none"
+            app:layout_constraintTop_toBottomOf="@+id/textview4"/>
 
 
 
-            <EditText
-                android:id="@+id/txtReferenciaTram"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:hint="@string/referencia"
-                android:inputType="text"
-                app:layout_constraintTop_toBottomOf="@+id/txtDireccionTram"/>
+        <EditText
+            android:id="@+id/txtContactTramUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/contacto"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtClienTramUp"/>
+
+
+        <EditText
+            android:id="@+id/txtTelefonoTramUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/telefono"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtContactTramUp"/>
+
+
+        <EditText
+            android:id="@+id/txtDireccionTramUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/direccion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:inputType="text"
+            app:layout_constraintTop_toBottomOf="@+id/txtTelefonoTramUp"/>
+
+
+
+        <EditText
+            android:id="@+id/txtReferenciaTramUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/referencia"
+            android:inputType="text"
+            app:layout_constraintTop_toBottomOf="@+id/txtDireccionTramUp"/>
 
 
         <com.google.android.material.divider.MaterialDivider
@@ -162,7 +162,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/txtReferenciaTram"/>
+            app:layout_constraintTop_toBottomOf="@+id/txtReferenciaTramUp"/>
 
 
         <TextView
@@ -185,18 +185,17 @@
             android:textSize="11sp"
             android:text="Selecciona el tipo"
             app:layout_constraintTop_toBottomOf="@+id/textdivider2"/>
-            <Spinner
-                android:id="@+id/txtTipoTram"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-
-                android:layout_marginEnd="24dp"
-                android:inputType="none"
-                tools:ignore="LabelFor"
-                app:layout_constraintTop_toBottomOf="@+id/textview5"/>
+        <Spinner
+            android:id="@+id/txtTipoTramUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:inputType="none"
+            tools:ignore="LabelFor"
+            app:layout_constraintTop_toBottomOf="@+id/textview5"/>
         <EditText
-            android:id="@+id/txtTipoOtroTram"
+            android:id="@+id/txtTipoOtroTramUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -204,7 +203,7 @@
             android:layout_marginEnd="24dp"
             android:inputType="text"
             tools:ignore="LabelFor"
-            app:layout_constraintTop_toBottomOf="@+id/txtTipoTram"/>
+            app:layout_constraintTop_toBottomOf="@+id/txtTipoTramUp"/>
 
         <TextView
             android:id="@+id/textview6"
@@ -215,60 +214,60 @@
             android:layout_marginEnd="24dp"
             android:textSize="11sp"
             android:text="Selecciona la frecuencia"
-            app:layout_constraintTop_toBottomOf="@+id/txtTipoOtroTram"/>
-            <Spinner
-                android:id="@+id/txtFrecuenciaTramite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtTipoOtroTramUp"/>
+        <Spinner
+            android:id="@+id/txtFrecuenciaTramiteUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
 
-                android:layout_marginEnd="24dp"
-                android:inputType="none"
-                tools:ignore="LabelFor"
-                app:layout_constraintTop_toBottomOf="@+id/textview6"/>
+            android:layout_marginEnd="24dp"
+            android:inputType="none"
+            tools:ignore="LabelFor"
+            app:layout_constraintTop_toBottomOf="@+id/textview6"/>
 
 
         <CheckBox
-                android:id="@+id/op1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nivel1"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtFrecuenciaTramite"/>
+            android:id="@+id/op1Up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nivel1"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtFrecuenciaTramiteUp"/>
 
 
-            <CheckBox
-                android:id="@+id/op2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nivel2"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/op1"/>
+        <CheckBox
+            android:id="@+id/op2Up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nivel2"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/op1Up"/>
 
 
-            <CheckBox
-                android:id="@+id/op3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nivel3"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/op2"/>
+        <CheckBox
+            android:id="@+id/op3Up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nivel3"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/op2Up"/>
 
-            <CheckBox
-                android:id="@+id/op4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nivel4"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/op3"/>
+        <CheckBox
+            android:id="@+id/op4Up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nivel4"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/op3Up"/>
 
 
 
@@ -283,10 +282,10 @@
             android:hint="@string/problemas"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/op4">
+            app:layout_constraintTop_toBottomOf="@+id/op4Up">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtProblemaTram"
+                android:id="@+id/txtProblemaTramUp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top" />
@@ -306,14 +305,14 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout10">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtCondicionTram"
+                android:id="@+id/txtCondicionTramUp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/bdAddTramite"
+            android:id="@+id/bdAddTramiteUp"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_marginStart="24dp"
