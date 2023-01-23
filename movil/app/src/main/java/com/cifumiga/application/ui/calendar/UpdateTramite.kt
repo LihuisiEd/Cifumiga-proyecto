@@ -9,9 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import com.cifumiga.application.R
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
-
 import kotlinx.android.synthetic.main.activity_update_tramite.*
-
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,6 +46,7 @@ class UpdateTramite : AppCompatActivity() {
 
         })
         txtTipo.adapter = adapterTipos
+        txtNumeroTramUp.isEnabled = false
 
         val txtFrecuencia = txtFrecuenciaTramiteUp
         val frecuencias = ArrayList<String>()
@@ -117,7 +116,7 @@ class UpdateTramite : AppCompatActivity() {
         txtTipoTramUp.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p2 == 2){
+                if (p2 == 5){
                     txtTipoOtroTramUp.visibility = View.VISIBLE
                 } else {
                     txtTipoOtroTramUp.visibility = View.GONE
@@ -137,6 +136,8 @@ class UpdateTramite : AppCompatActivity() {
             cliente = bundle.getString("cliente").toString()
             tipo = bundle.getString("tipo").toString()
             frecuencia = bundle.getString("frecuencia").toString()
+            txtNumeroTramUp.setText(bundle.getString("id").toString())
+            txtCulmTramUp.setText(bundle.getString("culminacion").toString())
             txtContactTramUp.setText(bundle.getString("contacto").toString())
             txtTelefonoTramUp.setText(bundle.getString("telefono").toString())
             txtProblemaTramUp.setText(bundle.getString("problemas").toString())
@@ -172,6 +173,10 @@ class UpdateTramite : AppCompatActivity() {
     }
 
     private fun subirTramite() {
+        val nombre = txtClienTramUp.selectedItem.toString()
+        val fecha_cul = txtCulmTramUp.text.toString().trim()
+        val fecha = txtFecTramUp.text.toString().trim()
+
         var nivel_1 = false
         var nivel_2 = false
         var nivel_3 = false
@@ -192,7 +197,7 @@ class UpdateTramite : AppCompatActivity() {
             showError("Debes colocar la fecha inicial")
             txtFecTramUp.error = "Campo requerido"
         } else {
-            db.collection("tramites").document(id)
+            db.collection("hojas_trabajo").document("$id $fecha")
                 .set(hashMapOf(
                     "id" to id,
                     "cliente" to cliente,
@@ -202,6 +207,7 @@ class UpdateTramite : AppCompatActivity() {
                     "contacto" to txtContactTramUp.text.toString(),
                     "telefono" to txtTelefonoTramUp.text.toString(),
                     "fecha" to txtFecTramUp.text.toString(),
+                    "culminacion" to fecha_cul,
                     "frecuencia" to frecuencia,
                     "nivel_1" to nivel_1.toString(),
                     "nivel_2" to nivel_2.toString(),

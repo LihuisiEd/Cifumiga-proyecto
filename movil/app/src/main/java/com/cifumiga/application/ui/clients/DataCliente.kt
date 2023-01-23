@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cifumiga.application.ui.services.AdaptadorServicios
 import com.cifumiga.application.ui.services.AddServicio
 import com.cifumiga.application.R
+import com.cifumiga.application.models.Certificado
 import com.cifumiga.application.models.ServicioX
+import com.cifumiga.application.ui.certificado.AdaptadorCertificados
+import com.cifumiga.application.ui.certificado.CertificadoActivity
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_data_cliente.*
 
@@ -22,6 +25,12 @@ class DataCliente : AppCompatActivity() {
     private lateinit var servArrayList: ArrayList<ServicioX>
     private lateinit var adapter : AdaptadorServicios
     var llenarLista = ArrayList<ServicioX>()
+
+    private lateinit var certRecyclerView: RecyclerView
+    private lateinit var certArrayList: ArrayList<Certificado>
+    private lateinit var adapterCert : AdaptadorCertificados
+    var llenarLista2 = ArrayList<Certificado>()
+
     var nombre:String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,9 +53,22 @@ class DataCliente : AppCompatActivity() {
         adapter = AdaptadorServicios(servArrayList)
         servRecyclerView.adapter = adapter
 
+        certRecyclerView = lista_certificados
+        certRecyclerView.layoutManager = LinearLayoutManager(this)
+        certRecyclerView.setHasFixedSize(true)
+        certArrayList = arrayListOf()
+        adapterCert = AdaptadorCertificados(certArrayList)
+        certRecyclerView.adapter = adapterCert
+
 
         btnAddService.setOnClickListener(){
             val intent = Intent(this, AddServicio::class.java)
+            intent.putExtra("cliente", nombre)
+            startActivity(intent)
+        }
+
+        btnAddCert.setOnClickListener(){
+            val intent = Intent(this, CertificadoActivity::class.java)
             intent.putExtra("cliente", nombre)
             startActivity(intent)
         }
@@ -59,7 +81,28 @@ class DataCliente : AppCompatActivity() {
 
         getServices()
 
+        getCertificados()
 
+    }
+
+    private fun getCertificados() {
+        dbl = FirebaseFirestore.getInstance()
+        dbl.collection("certificados").whereEqualTo("cliente", nombre).
+        addSnapshotListener(object : EventListener<QuerySnapshot> {
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null){
+                    showError("No se logró")
+                    return
+                }
+                for (dc : DocumentChange in value?.documentChanges!!){
+                    if (dc.type == DocumentChange.Type.ADDED){
+                        certArrayList.add(dc.document.toObject(Certificado::class.java))
+                    }
+                }
+                adapterCert.notifyDataSetChanged()
+            }
+
+        })
     }
 
     private fun getServices() {

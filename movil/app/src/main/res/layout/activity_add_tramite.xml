@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <LinearLayout
             android:id="@+id/fechainputs"
             android:layout_width="match_parent"
@@ -53,7 +52,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="24dp"
-                    android:hint="@string/fecha"
+                    android:hint="@string/fecha_del_tramite"
+                    android:inputType="none" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnCulTram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/blue_200"
+                    android:contentDescription="@string/seleccionar_fecha"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="Seleccionar"
+                    app:cornerRadius="100dp" />
+
+                <EditText
+                    android:id="@+id/txtCulmTram"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:hint="@string/fecha_de_culminaci_n"
                     android:inputType="none" />
             </LinearLayout>
 
@@ -88,7 +115,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:textSize="11sp"
-                android:text="Selecciona el cliente"
+                android:text="@string/selecciona_el_cliente"
                 app:layout_constraintTop_toBottomOf="@+id/textdivider"/>
             <Spinner
                 android:id="@+id/txtClienTram"
@@ -183,18 +210,18 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:textSize="11sp"
-            android:text="Selecciona el tipo"
+            android:text="@string/selecciona_el_tipo"
             app:layout_constraintTop_toBottomOf="@+id/textdivider2"/>
-            <Spinner
-                android:id="@+id/txtTipoTram"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+        <Spinner
+            android:id="@+id/txtTipoTram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:inputType="none"
+            tools:ignore="LabelFor"
+            app:layout_constraintTop_toBottomOf="@+id/textview5"/>
 
-                android:layout_marginEnd="24dp"
-                android:inputType="none"
-                tools:ignore="LabelFor"
-                app:layout_constraintTop_toBottomOf="@+id/textview5"/>
         <EditText
             android:id="@+id/txtTipoOtroTram"
             android:layout_width="match_parent"
@@ -214,18 +241,28 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:textSize="11sp"
-            android:text="Selecciona la frecuencia"
+            android:text="@string/selecciona_la_frecuencia"
             app:layout_constraintTop_toBottomOf="@+id/txtTipoOtroTram"/>
-            <Spinner
-                android:id="@+id/txtFrecuenciaTramite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+        <Spinner
+            android:id="@+id/txtFrecuenciaTramite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:inputType="none"
+            tools:ignore="LabelFor"
+            app:layout_constraintTop_toBottomOf="@+id/textview6"/>
 
-                android:layout_marginEnd="24dp"
-                android:inputType="none"
-                tools:ignore="LabelFor"
-                app:layout_constraintTop_toBottomOf="@+id/textview6"/>
+        <EditText
+            android:id="@+id/txtFrecuenciaOtroTram"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:hint="@string/especificar_secuencia"
+            android:layout_marginEnd="24dp"
+            android:inputType="number"
+            tools:ignore="LabelFor"
+            app:layout_constraintTop_toBottomOf="@+id/txtFrecuenciaTramite"/>
 
 
         <CheckBox
@@ -236,7 +273,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtFrecuenciaTramite"/>
+                app:layout_constraintTop_toBottomOf="@+id/txtFrecuenciaOtroTram"/>
 
 
             <CheckBox

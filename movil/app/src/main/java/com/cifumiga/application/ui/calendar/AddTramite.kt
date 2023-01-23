@@ -13,8 +13,6 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
 import kotlinx.android.synthetic.main.activity_add_tramite.*
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -29,6 +27,7 @@ class AddTramite : AppCompatActivity() {
     var frecuencia: Int = 0
     var dias:Int = 0
     var fecha:String = ""
+    var fecha_cul:String =""
     var fecha_id:String =  ""
 
 
@@ -112,6 +111,16 @@ class AddTramite : AppCompatActivity() {
             }
         }
 
+        val dateSetListenerCul = object : DatePickerDialog.OnDateSetListener {
+            override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int,
+                                   dayOfMonth: Int) {
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, monthOfYear)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateDateInViewCul()
+            }
+        }
+
         btnFecTram.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View) {
                 DatePickerDialog(this@AddTramite,
@@ -123,11 +132,22 @@ class AddTramite : AppCompatActivity() {
 
         })
 
+        btnCulTram.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View) {
+                DatePickerDialog(this@AddTramite,
+                    dateSetListenerCul,
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DAY_OF_MONTH)).show()
+            }
+        })
+
         txtTipoOtroTram.visibility = View.GONE
+        txtFrecuenciaOtroTram.visibility = View.GONE
         txtTipoTram.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p2 == 2){
+                if (p2 == 5){
                     txtTipoOtroTram.visibility = View.VISIBLE
                 } else {
                     txtTipoOtroTram.visibility = View.GONE
@@ -147,27 +167,38 @@ class AddTramite : AppCompatActivity() {
                 if (p2 == 0){
                     frecuencia = 52
                     dias = 7
+                    txtFrecuenciaOtroTram.setText(dias.toString())
                 }
                 //Mensual
                 if (p2 == 1){
                     frecuencia = 12
                     dias = 30
+                    txtFrecuenciaOtroTram.setText(dias.toString())
                 }
                 //Trimestral
                 if (p2 == 2){
                     frecuencia = 4
                     dias = 91
+                    txtFrecuenciaOtroTram.setText(dias.toString())
                 }
                 //Semestral
                 if (p2 == 3){
                     frecuencia = 2
                     dias = 183
+                    txtFrecuenciaOtroTram.setText(dias.toString())
                 }
+
+                if (p2 == 4){
+                    txtFrecuenciaOtroTram.visibility = View.VISIBLE
+                    txtFrecuenciaOtroTram.setText(dias.toString())
+                }
+
+
                 /*
                 Si es semanal ---> dias +7
                 Si es Mensual ---> dias +30
-                Si es Trimestral --> dias +84
-                Si es Semestral ---> dias +181
+                Si es Trimestral --> dias +91
+                Si es Semestral ---> dias +183
                  */
             }
 
@@ -191,16 +222,21 @@ class AddTramite : AppCompatActivity() {
 
     private fun subirTramite() {
         fecha = txtFecTram.text.toString().trim()
-        fecha_id = txtFecTram.text.toString().trim()
+        fecha_cul = txtCulmTram.text.toString().trim()
         var nombre = txtClienTram.selectedItem.toString()
-        val id = "${generarId()}${nombre.uppercase()}"
+        val id = "${nombre.uppercase()}-${generarId()}"
         var nivel_1 = false
         var nivel_2 = false
         var nivel_3 = false
         var nivel_4 = false
         var tipo = txtTipoTram.selectedItem.toString()
+        var days_frec = txtFrecuenciaTramite.selectedItem.toString()
         if (tipo.equals("Otro")){
             tipo = txtTipoOtroTram.text.toString()
+        }
+
+        if (days_frec.equals("Otro")){
+            dias = txtFrecuenciaOtroTram.text.toString().toInt()
         }
         if (op1.isChecked){
             nivel_1 = true
@@ -217,12 +253,20 @@ class AddTramite : AppCompatActivity() {
         if (fecha.isEmpty()){
             showError("Debes colocar la fecha inicial")
             txtFecTram.error = "Campo requerido"
+        }
+        if (fecha_cul.isEmpty()){
+            showError("Debes colocar la fecha de culminación")
+            txtCulmTram.error = "Campo requerido"
         } else {
-            problema = txtProblemaTram.text.toString()
-            for (i in 1 until frecuencia+1){
-                db.collection("tramites").document("$id ${sumarFecha(fecha, dias)} $i")
+            var termino = compruebaCulminacino(fecha)
+            while(termino){
+                termino = compruebaCulminacino(fecha)
+                if (!termino){
+                    break
+                }
+                db.collection("hojas_trabajo").document("$id ${sumarFecha(fecha, dias)}")
                     .set(hashMapOf(
-                        "id" to "$id $fecha $i",
+                        "id" to id,
                         "cliente" to nombre,
                         "tipo" to tipo,
                         "direccion" to txtDireccionTram.text.toString(),
@@ -230,6 +274,7 @@ class AddTramite : AppCompatActivity() {
                         "contacto" to txtContactTram.text.toString(),
                         "telefono" to txtTelefonoTram.text.toString(),
                         "fecha" to fecha,
+                        "culminacion" to fecha_cul,
                         "frecuencia" to txtFrecuenciaTramite.selectedItem.toString(),
                         "nivel_1" to nivel_1.toString(),
                         "nivel_2" to nivel_2.toString(),
@@ -241,10 +286,23 @@ class AddTramite : AppCompatActivity() {
                     ))
                     .addOnSuccessListener { showError("Guardado con éxito") }
                     .addOnFailureListener { showError("Problemas al guardar") }
+                termino = compruebaCulminacino(fecha)
             }
-
         }
+    }
 
+    private fun compruebaCulminacino(fecha: String):Boolean {
+        var validacion = false
+        val fe = SimpleDateFormat("dd-MM-yyyy")
+        val fechaInicio: Date = fe.parse(fecha) as Date
+        val fechaFin: Date = fe.parse(fecha_cul) as Date
+        //validacion = fecha_inicio.before(fecha_fin)
+        if (fechaInicio.compareTo(fechaFin) > 0){
+            validacion = false
+        } else if (fechaInicio.compareTo(fechaFin) < 0){
+            validacion = true
+        }
+        return validacion
     }
 
     private fun generarId(): String{
@@ -260,7 +318,7 @@ class AddTramite : AppCompatActivity() {
         cal[f[2].toInt(), f[1].toInt() - 1] = f[0].toInt()
 
         cal.add(Calendar.DAY_OF_MONTH, dias)
-        val fe = SimpleDateFormat("dd-MM-YYYY")
+        val fe = SimpleDateFormat("dd-MM-yyyy")
         fecha = fe.format(cal.getTime())
         return fe.format(cal.getTime())
     }
@@ -279,6 +337,12 @@ class AddTramite : AppCompatActivity() {
         val myFormat = "dd-MM-yyy" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         txtFecTram.setText(sdf.format(cal.getTime()))
+    }
+
+    private fun updateDateInViewCul() {
+        val myFormat = "dd-MM-yyy" // mention the format you need
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        txtCulmTram.setText(sdf.format(cal.getTime()))
     }
 
 

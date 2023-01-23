@@ -37,6 +37,7 @@ class AdaptadorTramite(var Lista:ArrayList<Tramite>): RecyclerView.Adapter<Adapt
         val referencia = Lista[position].referencia
         val frecuencia = Lista[position].frecuencia
         val fecha = Lista[position].fecha
+        val culminacion = Lista[position].culminacion
         val nivel_1 = Lista[position].nivel_1
         val nivel_2 = Lista[position].nivel_2
         val nivel_3 = Lista[position].nivel_3
@@ -53,6 +54,7 @@ class AdaptadorTramite(var Lista:ArrayList<Tramite>): RecyclerView.Adapter<Adapt
             llamaractividad.putExtra("direccion", direccion)
             llamaractividad.putExtra("referencia", referencia)
             llamaractividad.putExtra("fecha", fecha)
+            llamaractividad.putExtra("culminacion", culminacion)
             llamaractividad.putExtra("frecuencia",frecuencia)
             llamaractividad.putExtra("nivel_1",nivel_1)
             llamaractividad.putExtra("nivel_2",nivel_2)
@@ -73,6 +75,7 @@ class AdaptadorTramite(var Lista:ArrayList<Tramite>): RecyclerView.Adapter<Adapt
             llamaractividad.putExtra("referencia", referencia)
             llamaractividad.putExtra("fecha", fecha)
             llamaractividad.putExtra("frecuencia",frecuencia)
+            llamaractividad.putExtra("culminacion", culminacion)
             llamaractividad.putExtra("nivel_1",nivel_1)
             llamaractividad.putExtra("nivel_2",nivel_2)
             llamaractividad.putExtra("nivel_3",nivel_3)

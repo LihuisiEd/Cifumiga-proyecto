@@ -21,20 +21,28 @@ class ClientesActivity : AppCompatActivity() {
     private lateinit var userRecyclerView: RecyclerView
     private lateinit var userArrayList: ArrayList<Cliente>
     private lateinit var adapter : AdaptadorClientes
+    var permiso:String? = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_clientes)
 
+
         val mensaje = mensaje_busqueda
+
+        val bundle: Bundle ? = intent.extras
+        permiso = bundle?.getString("permiso")
+
+        if (permiso == "lector"){
+            btnAddClient.isEnabled = false
+        }
 
 
         btnAddClient.setOnClickListener() { val intent = Intent(this, AddClient::class.java)
             startActivity(intent) }
 
         userRecyclerView = findViewById(R.id.lista_clientes)
-
         userRecyclerView.layoutManager = LinearLayoutManager(this)
         userRecyclerView.setHasFixedSize(true)
         userArrayList = arrayListOf()
@@ -84,15 +92,6 @@ class ClientesActivity : AppCompatActivity() {
 
     }
 
-    private fun swipeconfig(swipe: SwipeRefreshLayout) {
-        swipe.isEnabled = true
-        swipe.isRefreshing = true
-    }
-
-    private fun swipeEnd(swipe: SwipeRefreshLayout) {
-        swipe.isRefreshing = false
-        swipe.isEnabled = false
-    }
 
     private fun showError(s:String){
         Toast.makeText(this, s, Toast.LENGTH_LONG).show()

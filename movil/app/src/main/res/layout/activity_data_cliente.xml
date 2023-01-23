@@ -155,7 +155,19 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lista_servicios"
                 android:layout_width="match_parent"
-                tools:listitem="@layout/servicios_elements"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="16dp"
+                android:text="Certificado"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lista_certificados"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <Button
@@ -167,6 +179,17 @@
                 app:cornerRadius="100dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/agregar_servicio"
+                android:layout_marginTop="8dp"/>
+
+            <Button
+                android:id="@+id/btnAddCert"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                app:cornerRadius="100dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/agregar_certificado"
                 android:layout_marginTop="8dp"/>
 
 

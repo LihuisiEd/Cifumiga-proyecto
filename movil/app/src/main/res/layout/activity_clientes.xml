@@ -59,16 +59,11 @@
                 android:textColor="@color/gray_500" />
         </LinearLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeClientes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lista_clientes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     </LinearLayout>
 

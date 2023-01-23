@@ -28,6 +28,7 @@ class AdaptadorServicios(var Lista: ArrayList<ServicioX>):
         holder?.ftipo?.text= Lista[position].tipo
         holder?.farea?.text= Lista[position].area
         holder?.fdim?.text= Lista[position].dimension + " m²"
+        val id = Lista[position].id
         val desc = Lista[position].descripcion
         val area = Lista[position].area
         val dim = Lista[position].dimension
@@ -48,6 +49,7 @@ class AdaptadorServicios(var Lista: ArrayList<ServicioX>):
         }
         holder?.fEditr?.setOnClickListener(){
             val llamaractividad = Intent(holder.itemView.context, UpdateServicio::class.java)
+            llamaractividad.putExtra("id", id)
             llamaractividad.putExtra("desc", desc)
             llamaractividad.putExtra("area", area)
             llamaractividad.putExtra("dim", dim)
