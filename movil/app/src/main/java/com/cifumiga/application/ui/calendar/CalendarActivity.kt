@@ -29,12 +29,21 @@ class CalendarActivity : AppCompatActivity() {
     private lateinit var adapter : AdaptadorTramite
     var cal = Calendar.getInstance()
 
+    var permiso:String? = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
         val mensaje = mensaje_fecha
+
+        val bundle: Bundle ? = intent.extras
+        permiso = bundle?.getString("permiso")
+
+        if (permiso == "lector"){
+            btnAddTramite.isEnabled = false
+        }
 
         val dateSetListener = object : DatePickerDialog.OnDateSetListener {
             override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int,
@@ -86,7 +95,7 @@ class CalendarActivity : AppCompatActivity() {
 
     private fun getTramitesData() {
         db = FirebaseFirestore.getInstance()
-        db.collection("tramites").orderBy("cliente", Query.Direction.ASCENDING).
+        db.collection("hojas_trabajo").
         addSnapshotListener(object : EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
                 if (error != null){
@@ -113,16 +122,6 @@ class CalendarActivity : AppCompatActivity() {
         FiltroxFecha.setText(sdf.format(cal.getTime()))
     }
 
-
-    private fun swipeconfig(swipe: SwipeRefreshLayout) {
-        swipe.isEnabled = true
-        swipe.isRefreshing = true
-    }
-
-    private fun swipeEnd(swipe: SwipeRefreshLayout) {
-        swipe.isRefreshing = false
-        swipe.isEnabled = false
-    }
 
     private fun showError(s:String){
         Toast.makeText(this, s, Toast.LENGTH_LONG).show()

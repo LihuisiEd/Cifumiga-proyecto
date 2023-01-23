@@ -8,10 +8,6 @@ import android.os.StrictMode
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.cifumiga.application.MainActivity
 import com.cifumiga.application.R
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,6 +17,9 @@ class DataTramite : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     var id: String?=""
+    var nombre:String? = ""
+    var numero: String? = ""
+    var fecha:String? =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +31,13 @@ class DataTramite : AppCompatActivity() {
 
         val bundle :Bundle ?=intent.extras
 
+        nombre = bundle?.getString("cliente")?.uppercase()
         id = bundle?.getString("id")
+        numero = bundle?.getString("id")
         id_Tramite.text = bundle?.getString("id")
+        culminacion_Tramite.text = bundle?.getString("culminacion")
         fec_Tramite.text = bundle?.getString("fecha")
+        fecha = bundle?.getString("fecha")
         cliente_tramite.text = bundle?.getString("cliente")
         contact_Tramite.text = bundle?.getString("contacto")
         telefono_Tramite.text = bundle?.getString("telefono")
@@ -83,7 +86,7 @@ class DataTramite : AppCompatActivity() {
             .setTitle(t)
             .setMessage(s)
             .setPositiveButton("Si", { dialog, whichButton ->
-                db.collection("tramites").document(id.toString()).delete()
+                db.collection("hojas_trabajo").document("$id $fecha").delete()
                 showError(getString(R.string.registro_eliminado))
             })
             .setNegativeButton("No", { dialog, whichButton ->

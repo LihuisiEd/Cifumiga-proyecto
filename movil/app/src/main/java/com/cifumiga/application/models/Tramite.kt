@@ -9,6 +9,7 @@ data class Tramite(
     val contacto: String?="",
     val telefono: String?="",
     val fecha: String?="",
+    val culminacion: String?= "",
     val frecuencia: String?= "",
     val nivel_1: String?="",
     val nivel_2: String?="",

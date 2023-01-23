@@ -6,18 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.kilometraje.KilometrajeActivity">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeKilometrajes"
-        android:layout_width="match_parent"
-        android:layout_marginTop="16dp"
-        android:layout_height="match_parent">
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lista_kilometrajes"
-
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddKM"

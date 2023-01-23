@@ -7,104 +7,175 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/saludo_ingreso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="¡Bienvenido!"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout9"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saludo_ingreso">
-
-        <LinearLayout
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/imageButton1"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/layout_Tittle"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/nunito_bold"
-                android:background="@drawable/button_corners"
-                android:drawableTop="@drawable/user_group_solid"
-                android:drawableTint="@color/white_200"
-                android:paddingVertical="40dp"
-                android:text="@string/clients"
-                tools:targetApi="m" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/saludo_ingreso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:text="¡Bienvenido!"
+                    android:textSize="25sp"
+                    />
+                <TextView
+                    android:id="@+id/permiso_ingreso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginTop="32dp"
+                    />
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/imageButton2"
+
+
+            <TextView
+                android:id="@+id/email_ingreso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_Tittle" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout9"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/nunito_bold"
-                android:background="@drawable/button_corners"
-                android:backgroundTint="@color/blue_200"
-                android:drawableTop="@drawable/calendar_days_regular"
-                android:drawableTint="@color/white_200"
-                android:paddingVertical="40dp"
-                android:text="@string/tr_mites"
-                tools:targetApi="m" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/email_ingreso">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/imageButton3"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/nunito_bold"
-                android:background="@drawable/button_corners"
-                android:drawableTop="@drawable/road_solid"
-                android:drawableTint="@color/white_200"
-                android:paddingVertical="40dp"
-                android:text="@string/kilometraje"
-                tools:targetApi="m" />
+                    <Button
+                        android:id="@+id/imageButton1"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_corners"
+                        android:drawableTop="@drawable/user_group_solid"
+                        android:drawableTint="@color/white_200"
+                        android:fontFamily="@font/nunito_bold"
+                        android:paddingVertical="40dp"
+                        android:textSize="12sp"
+                        android:text="@string/clients"
+                        tools:targetApi="m" />
 
-            <Button
-                android:id="@+id/imageButton4"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:fontFamily="@font/nunito_bold"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_corners"
-                android:drawableTop="@drawable/user_gear_solid"
-                android:drawableTint="@color/white_200"
-                android:paddingVertical="40dp"
-                android:text="@string/perfil"
-                tools:targetApi="m" />
-        </LinearLayout>
+                    <Button
+                        android:id="@+id/imageButton2"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:background="@drawable/button_corners"
+                        android:backgroundTint="@color/blue_200"
+                        android:drawableTop="@drawable/calendar_days_regular"
+                        android:drawableTint="@color/white_200"
+                        android:fontFamily="@font/nunito_bold"
+                        android:paddingTop="40dp"
+                        android:paddingBottom="30dp"
+                        android:text="@string/programaci_n_de_trabajos"
+                        tools:targetApi="m" />
+                </LinearLayout>
 
-    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/layout_linear90"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/imageButton3"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:background="@drawable/button_corners"
+                        android:drawableTop="@drawable/road_solid"
+                        android:drawableTint="@color/white_200"
+                        android:fontFamily="@font/nunito_bold"
+                        android:paddingVertical="40dp"
+                        android:text="@string/kilometraje"
+                        tools:targetApi="m" />
+
+                    <Button
+                        android:id="@+id/imageButton4"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_margin="5dp"
+                        android:textSize="12sp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_corners"
+                        android:drawableTop="@drawable/user_gear_solid"
+                        android:drawableTint="@color/white_200"
+                        android:fontFamily="@font/nunito_bold"
+                        android:paddingVertical="40dp"
+                        android:text="@string/perfil"
+                        tools:targetApi="m" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/link_pagina"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/green_200"
+                    app:cornerRadius="8dp"
+                    android:drawableTint="@color/white_200"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/p_gina_web"
+                    tools:targetApi="m" />
+                <Button
+                    android:id="@+id/brochur"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:textSize="12sp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/blue_200"
+                    app:cornerRadius="8dp"
+                    android:drawableTint="@color/white_200"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/informaci_n_de_la_empresa"
+                    tools:targetApi="m" />
+
+            </LinearLayout>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/logout"
@@ -120,7 +191,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

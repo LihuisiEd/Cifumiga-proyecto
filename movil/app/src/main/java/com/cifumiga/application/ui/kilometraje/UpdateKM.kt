@@ -11,6 +11,7 @@ import com.cifumiga.application.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_update_km.*
 
+
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
@@ -85,12 +86,28 @@ class UpdateKM : AppCompatActivity() {
     }
 
     private fun calcularKM() {
-        val inicio = txtInicioKM.text.toString().trim()
-        val fin = txtFinKM.text.toString().trim()
-        if (fin.isNotEmpty() || inicio.isNotEmpty()){
-            val ope = inicio.toDouble() - fin.toDouble()
-            val opeOff = (ope * 100.0).roundToInt() /100.0
-            txtTotalKM.setText(opeOff.toString())
+        var inicio = txtInicioKM.text.toString().trim()
+        var fin = txtFinKM.text.toString().trim()
+        if (inicio.isEmpty()){
+            txtInicioKM.error = "Campo necesario"
+            txtInicioKM.requestFocus()
+            return
+        }
+        if (fin.isEmpty()){
+            txtFinKM.error = "Campo necesario"
+            txtInicioKM.requestFocus()
+            return
+        }
+        if (fin.isEmpty() || inicio.isEmpty()){
+            txtInicioKM.error = "Campo necesario"
+            txtFinKM.error = "Campo necesario"
+            showError("Antes de calcular el resultado, llena ambos km")
+        }
+        if (inicio.toInt() < fin.toInt()){
+            showError("El Km final no puede ser mayor al inicial")
+        } else {
+            val ope = txtInicioKM.text.toString().trim().toInt() - txtFinKM.text.toString().trim().toInt()
+            txtTotalKM.setText(ope.toString())
         }
     }
 

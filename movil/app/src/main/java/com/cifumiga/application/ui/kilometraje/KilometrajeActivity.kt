@@ -21,7 +21,7 @@ class KilometrajeActivity : AppCompatActivity() {
     private lateinit var adapter : AdaptadorKilometraje
 
     var email:String? = ""
-
+    var permiso: String ?= ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +31,7 @@ class KilometrajeActivity : AppCompatActivity() {
 
         val bundle: Bundle ? = intent.extras
         email = bundle?.getString("email")
+        permiso = bundle?.getString("permiso")
 
         btnAddKM.setOnClickListener(){
             val intent = Intent(this, AddKm::class.java)
@@ -46,13 +47,36 @@ class KilometrajeActivity : AppCompatActivity() {
 
         kmRecyclerView.adapter = adapter
 
+        if (permiso != "admin"){
+            getKmData()
+        } else {
+            getKmADMIN()
+        }
 
-        getKmData()
 
     }
 
-    private fun getKmData() {
+    private fun getKmADMIN() {
+        db = FirebaseFirestore.getInstance()
+        db.collection("kilometrajes").
+        addSnapshotListener(object : EventListener<QuerySnapshot> {
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null){
+                    showError("No se logró")
+                    return
+                }
+                for (dc : DocumentChange in value?.documentChanges!!){
+                    if (dc.type == DocumentChange.Type.ADDED){
+                        kmArrayList.add(dc.document.toObject(Kilometraje::class.java))
+                    }
+                }
+                adapter.notifyDataSetChanged()
+            }
 
+        })
+    }
+
+    private fun getKmData() {
         db = FirebaseFirestore.getInstance()
         db.collection("kilometrajes").whereEqualTo("empleado", email).
         addSnapshotListener(object : EventListener<QuerySnapshot> {
@@ -71,16 +95,6 @@ class KilometrajeActivity : AppCompatActivity() {
 
         })
 
-    }
-
-    private fun swipeconfig(swipe: SwipeRefreshLayout) {
-        swipe.isEnabled = true
-        swipe.isRefreshing = true
-    }
-
-    private fun swipeEnd(swipe: SwipeRefreshLayout) {
-        swipe.isRefreshing = false
-        swipe.isEnabled = false
     }
 
     private fun showError(s:String){

@@ -1,6 +1,7 @@
 package com.cifumiga.application.ui.services
 
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,15 +9,20 @@ import android.widget.*
 
 import com.cifumiga.application.R
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
 import kotlinx.android.synthetic.main.activity_add_servicio.*
 
 import org.json.JSONException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AddServicio : AppCompatActivity() {
 
     private lateinit var db : FirebaseFirestore
     var nombre:String? = null
     var id_tipo:Int? = null
+    var cal = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +54,7 @@ class AddServicio : AppCompatActivity() {
         txtTipoServ.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p2 == 2){
+                if (p2 == 5){
                     txtTipoOtroServ.visibility = View.VISIBLE
                 } else {
                     txtTipoOtroServ.visibility = View.GONE
@@ -58,6 +64,8 @@ class AddServicio : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         }
+
+
 
 
 
@@ -73,7 +81,9 @@ class AddServicio : AppCompatActivity() {
 
     }
 
+
     fun addService() {
+        val id = "$nombre-${generarId()}"
         val area = txtAreaServ.text.toString().trim()
         val dim = txtDimServ.text.toString().trim()
         val frec = txtFrecServ.text.toString().trim()
@@ -86,20 +96,27 @@ class AddServicio : AppCompatActivity() {
         if (area.isEmpty() || dim.isEmpty()){
             showError("Debe llenar área y dimensión")
         } else {
-            val servicio = hashMapOf(
-                "descripcion" to desc,
-                "area" to area,
-                "dimension" to dim,
-                "frecuencia" to frec,
-                "precio" to precio,
-                "tipo" to tipo,
-                "cliente" to nombre
-            )
-            db.collection("servicios").document(nombre.toString())
-                .set(servicio)
+            db.collection("servicios").document(id)
+                .set(hashMapOf(
+                    "id" to id,
+                    "descripcion" to desc,
+                    "area" to area,
+                    "dimension" to dim,
+                    "frecuencia" to frec,
+                    "precio" to precio,
+                    "tipo" to tipo,
+                    "cliente" to nombre
+                ))
                 .addOnSuccessListener { showError("Guardado con éxito") }
                 .addOnFailureListener { showError("Problemas al guardar") }
         }
+    }
+
+    private fun generarId(): String{
+        val charset = ('A'..'Z') + ('0'..'9')
+
+        return List(3) { charset.random() }
+            .joinToString("")
     }
     private fun showError(s:String){
         Toast.makeText(this, s, Toast.LENGTH_LONG).show()

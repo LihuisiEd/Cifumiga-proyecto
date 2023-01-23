@@ -7,10 +7,6 @@ import android.view.View
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 import com.cifumiga.application.R
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_add_km.*
@@ -103,10 +99,10 @@ class AddKm : AppCompatActivity() {
             txtFinKM.error = "Campo necesario"
             showError("Antes de calcular el resultado, llena ambos km")
         }
-        if (inicio.toInt() < fin.toInt()){
-            showError("El Km final no puede ser mayor al inicial")
+        if (inicio.toInt() > fin.toInt()){
+            showError("El Km final debe ser mayor al inicial")
         } else {
-            val ope = txtInicioKM.text.toString().trim().toInt() - txtFinKM.text.toString().trim().toInt()
+            val ope = txtFinKM.text.toString().trim().toInt() - txtInicioKM.text.toString().trim().toInt()
             txtTotalKM.setText(ope.toString())
         }
     }

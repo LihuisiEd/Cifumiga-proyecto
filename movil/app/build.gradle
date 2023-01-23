@@ -53,12 +53,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     //Implements Adicional
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
-    implementation("com.android.volley:volley:1.2.1")
     implementation 'com.auth0.android:jwtdecode:2.0.1'
+    implementation 'com.github.mhiew:android-pdf-viewer:3.2.0-beta.1'
 
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
@@ -68,6 +66,7 @@ dependencies {
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
     implementation 'com.google.firebase:firebase-messaging-ktx:23.1.1'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.4.1'
 }

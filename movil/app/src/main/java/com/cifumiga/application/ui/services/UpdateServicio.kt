@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_update_servicio.*
 class UpdateServicio : AppCompatActivity() {
     private lateinit var db : FirebaseFirestore
     var id_servicio:Int? = null
-    var id_tipo:Int? = null
+    var id:String? = ""
     var nombre:String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +49,7 @@ class UpdateServicio : AppCompatActivity() {
         txtTipoServ.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if (p2 == 2){
+                if (p2 == 5){
                     txtTipoOtroServU.visibility = View.VISIBLE
                 } else {
                     txtTipoOtroServU.visibility = View.GONE
@@ -64,13 +64,13 @@ class UpdateServicio : AppCompatActivity() {
 
         val bundle : Bundle?=intent.extras
         if (bundle!=null){
+            id = bundle.getString("id")
             nombre = bundle.getString("cliente")
-            txtAreaServ.setText(bundle?.getString("area"))
-            txtDimServ.setText(bundle?.getString("dim"))
-            txtFrecServ.setText(bundle?.getString("frec"))
-            txtPrecServ.setText(bundle?.getString("precio"))
-            txtDescServ.setText(bundle?.getString("desc"))
-            bdAddServicio.isEnabled = false
+            txtAreaServ.setText(bundle.getString("area"))
+            txtDimServ.setText(bundle.getString("dim"))
+            txtFrecServ.setText(bundle.getString("frec"))
+            txtPrecServ.setText(bundle.getString("precio"))
+            txtDescServ.setText(bundle.getString("desc"))
         }
 
         bdAddServicio.setOnClickListener(){
@@ -95,17 +95,18 @@ class UpdateServicio : AppCompatActivity() {
         if (tipo.isEmpty()){
             showError("Debes seleccionar el tipo de servicio")
         } else {
-            val servicio = hashMapOf(
-                "descripcion" to desc,
-                "area" to area,
-                "dimension" to dim,
-                "frecuencia" to frec,
-                "precio" to precio,
-                "tipo" to tipo,
-                "cliente" to nombre
-            )
-            db.collection("servicios").document(nombre.toString())
-                .set(servicio)
+
+            db.collection("servicios").document(id.toString())
+                .set(hashMapOf(
+                    "id" to id,
+                    "descripcion" to desc,
+                    "area" to area,
+                    "dimension" to dim,
+                    "frecuencia" to frec,
+                    "precio" to precio,
+                    "tipo" to tipo,
+                    "cliente" to nombre
+                ))
                 .addOnSuccessListener { showError("Guardado con éxito") }
                 .addOnFailureListener { showError("Problemas al guardar") }
         }
